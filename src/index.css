@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-color: #ccff90; */
 }
 
 code {
@@ -13,10 +14,9 @@ code {
 }
 
 .App {
-  text-align: center;
-  background: linear-gradient(#dcedc8, transparent);
-  background-color: rgba(130, 211, 92, 0.733);
-  /* background-color: #dcedc8; */
+  background: linear-gradient(#f1f8e9, transparent);
+  background-color: rgba(240, 248, 237, 0.733);
+  /* background-color: #f1f8e9; */
 }
 
 .App-header {
@@ -36,9 +36,9 @@ code {
 }
 
 .imgPadding {
-  padding-left: 3%;
-  padding-right: 3%;
-  padding-top: 24%;
+  padding-left: 8%;
+  /* padding-right: 3%; */
+  padding-top: 22%;
 }
 
 .loginFormPadding {
@@ -66,6 +66,14 @@ code {
   /* background-color: #f5f5f5; */
 }
 
+.formStyle2 {
+  border-radius: 5px;
+  /* background-color: #f5f5f5; */
+}
+.cardPadding {
+  padding: 60px;
+}
+
 .btnStyling {
   border-radius: 10px;
   height: fit-content;
@@ -81,4 +89,39 @@ code {
 
 .padding-top-10px {
   padding-top: 10px;
+}
+
+.backgroundImg {
+  background-image: url("/src/images/drupad.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.7;
+  /* border-radius: 25px; */
+  /* filter: blur(3px);
+  -webkit-filter: blur(1px); */
+  height: 800px;
+}
+
+.navHeight {
+  height: 85px;
+}
+
+.navPaddingTop {
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.slnoStyle {
+  width: 70px;
+  text-align: center;
+}
+
+.releaseStyle {
+  width: 100px;
+  text-align: center;
+}
+
+.summaryStyle {
+  width: 450px;
 }

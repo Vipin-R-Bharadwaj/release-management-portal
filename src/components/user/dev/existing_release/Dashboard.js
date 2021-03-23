@@ -1,55 +1,79 @@
-import { Component } from "react";
-import Frontend from "./frontend/Frontend";
-import Hotfix from "./hotfix/Hotfix";
+import { useState, useEffect } from "react";
+import useFetch from "../../../../useFetch";
 import CreatableSelect from "react-select/creatable";
-import Daily from "./daily/Daily";
+import ExistingReleaseList from "../../../release/ExistingReleaseList";
+import { withRouter } from "react-router";
 
-class Dashboard extends Component {
-  state = {
-    option: null,
-    optionList: [
-      { label: "Hotfix Relese", value: "1" },
-      { label: "Daily Release", value: "2" },
-      { label: "Frontend Release", value: "3" },
-    ],
-  };
-  clickHandler = (event) => {
+const Dashboard = (props) => {
+  const data = useFetch("http://localhost:8000/all");
+  const optionList = [
+    { label: "All", value: "1" },
+    { label: "Daily Release", value: "2" },
+    { label: "Frontend Release", value: "3" },
+    { label: "Hotfix Relese", value: "4" },
+  ];
+  const [option, setOption] = useState("1");
+  const clickHandler = (event) => {
     if (event !== null) {
-      const option = event.value;
-      this.setState({ option });
+      setOption(event.value);
     }
   };
-  render() {
-    return (
-      <div className="container">
-        {/* <div className="container"> */}
-        <div className="padding-top-10px"></div>
-        <CreatableSelect
-          placeholder="Select Release Type"
-          // isClearable
-          options={this.state.optionList}
-          onChange={(event) => {
-            this.clickHandler(event);
-          }}
-          defaultValue="Select release type"
-          maxMenuHeight={150}
-        />
-        {/* </div> */}
-        <div className="padding-top-20px"></div>
-        {this.state.option === "1" ? (
-          <Hotfix />
-        ) : this.state.option === "2" ? (
-          <Daily />
-        ) : this.state.option === "3" ? (
-          <Frontend />
-        ) : (
-          <>
-            <p>Nothing Selected</p>
-          </>
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="container">
+      {/* <div className="container"> */}
+      <div className="padding-top-20px"></div>
+      <CreatableSelect
+        placeholder="All"
+        // isClearable
+        options={optionList}
+        onChange={(event) => {
+          clickHandler(event);
+        }}
+        defaultValue="Select release type"
+        maxMenuHeight={150}
+      />
+      {option === "1" ? (
+        <div className="row">
+          <div className="padding-top-20px">
+            <table className="highlight striped white">
+              <thead>
+                <tr>
+                  <th className="center">Sl No</th>
+                  <th className="center">Release</th>
+                  <th>Feature Summary</th>
+                  <th>Release Type</th>
+                  <th>Release Signoff Date</th>
+                  <th className="center">Release Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data &&
+                  data.map((element) => (
+                    <ExistingReleaseList
+                      key={element.id}
+                      id={element.id}
+                      data={element}
+                    />
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ) : option === "2" ? (
+        props.history.push("/dev/existingrelease/daily")
+      ) : // <Daily />
+      option === "3" ? (
+        props.history.push("/dev/existingrelease/frontend")
+      ) : // <Frontend />
+      option === "4" ? (
+        props.history.push("/dev/existingrelease/hotfix")
+      ) : (
+        // <Hotfix />
+        <> </>
+      )}
+      <div className="padding-top-20px"></div>
+    </div>
+  );
+};
 
-export default Dashboard;
+export default withRouter(Dashboard);

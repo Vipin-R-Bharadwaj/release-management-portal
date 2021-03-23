@@ -6,7 +6,7 @@ const Button = ({ submitHandler }) => {
         type="Submit"
         onClick={(event) => submitHandler(event)}
       >
-        Submit
+        Login
         <i className="material-icons right">send</i>
       </button>
     </div>

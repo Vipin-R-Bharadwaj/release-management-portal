@@ -1,168 +1,80 @@
-import { Component } from "react";
-import Button from "./Button";
-import DatePickerHOC from "./DatePickerHOC";
-import Input from "./Input";
+import { useState } from "react";
+import useFetch from "../../../../../useFetch";
+import FrontendList from "./FrontendList";
+import CreatableSelect from "react-select/creatable";
+import { withRouter } from "react-router";
 
-class Frontend extends Component {
-  state = {
-    featuresSummary: null,
-    platform: null,
-    releaseType: null,
-    releaseVersion: null,
-    impact: null,
-    impactAreas: null,
-    developerPOC: null,
-    qaPOC: null,
-    releaseSignOffDate: null,
-    releaseDate: new Date(),
-    releasePercentage: null,
-    releaseWindow: null,
+const Frontend = (props) => {
+  const data = useFetch("http://localhost:8000/frontend");
+  // const parsedData = Object.keys(data).map((key) => [key, data[key]]);
+  const optionList = [
+    { label: "All", value: "1" },
+    { label: "Daily Release", value: "2" },
+    { label: "Frontend Release", value: "3" },
+    { label: "Hotfix Relese", value: "4" },
+  ];
+  const [option, setOption] = useState("3");
+  const clickHandler = (event) => {
+    if (event !== null) {
+      setOption(event.value);
+    }
   };
-
-  inputOptions1 = [
-    {
-      btnID: "featuresSummary",
-      btnType: "text",
-      btnClass: "validate",
-      btnText: "Features Summary",
-      btnWidth: "m6",
-    },
-    {
-      btnID: "platform",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Platform",
-      btnWidth: "m3",
-    },
-    {
-      btnID: "releaseType",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Release Type",
-      btnWidth: "m3",
-    },
-  ];
-  inputOptions2 = [
-    {
-      btnID: "releaseVersion",
-      btnType: "text",
-      btnClass: "materialize-textarea",
-      btnText: "Release Version",
-      btnWidth: "m3",
-    },
-    {
-      btnID: "impact",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Impact",
-      btnWidth: "m2",
-    },
-    {
-      btnID: "impactAreas",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Impact Areas",
-      btnWidth: "m3",
-    },
-    {
-      btnID: "developerPOC",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Developer Point of Contact",
-      btnWidth: "m4",
-    },
-  ];
-  inputOptions3 = [
-    {
-      btnID: "qaPOC",
-      btnType: "text",
-      btnClass: "",
-      btnText: "QA Point of Contact",
-      btnWidth: "m3",
-    },
-  ];
-  inputOptions4 = [
-    {
-      btnID: "releasePercentage",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Release Percentage",
-      btnWidth: "m3",
-    },
-    {
-      btnID: "releaseWindow",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Release Window",
-      btnWidth: "m2",
-    },
-  ];
-
-  dateOptions = [
-    { id: "releaseSignOffDate", disabled: true },
-    { id: "releaseDate", disabled: false },
-  ];
-  render() {
-    return (
-      <div className="card z-depth-2 formStyle1">
-        <div className="padding-top-20px">
-          <form onSubmit={(event) => this.submitHandler(event)}>
-            {[this.inputOptions1, this.inputOptions2].map((option) => (
-              <div className="row">
-                {option.map((element) => (
-                  <Input
-                    key={element.btnID}
-                    btnID={element.btnID}
-                    btnType={element.btnType}
-                    btnClass={element.btnClass}
-                    btnText={element.btnText}
-                    btnWidth={element.btnWidth}
-                    changeHandler={this.changeHandler}
-                  />
-                ))}
-              </div>
-            ))}
-            <div className="row">
-              {this.inputOptions3.map((element) => (
-                <Input
-                  key={element.btnID}
-                  btnID={element.btnID}
-                  btnType={element.btnType}
-                  btnClass={element.btnClass}
-                  btnText={element.btnText}
-                  btnWidth={element.btnWidth}
-                  changeHandler={this.changeHandler}
-                />
-              ))}
-              {this.dateOptions.map((element) => (
-                <DatePickerHOC
-                  key={element.id}
-                  id={element.id}
-                  disabled={element.disabled}
-                  changeHandler={this.dateHandler}
-                />
-              ))}
-              {this.inputOptions4.map((element) => (
-                <Input
-                  key={element.btnID}
-                  btnID={element.btnID}
-                  btnType={element.btnType}
-                  btnClass={element.btnClass}
-                  btnText={element.btnText}
-                  btnWidth={element.btnWidth}
-                  changeHandler={this.changeHandler}
-                />
-              ))}
-            </div>
-            <div className="input-field col s12">
-              <Button submitHandler={this.submitHandler} />
-            </div>
-            <div className="padding-top-10px"></div>
-          </form>
+  return (
+    <div className="container">
+      {/* <div className="container"> */}
+      <div className="padding-top-20px"></div>
+      <CreatableSelect
+        placeholder="All"
+        // isClearable
+        options={optionList}
+        onChange={(event) => {
+          clickHandler(event);
+        }}
+        defaultValue="Select release type"
+        maxMenuHeight={150}
+      />
+      {option === "3" ? (
+        <div className="row">
+          <div className="padding-top-20px">
+            <table className="highlight striped white">
+              <thead>
+                <tr>
+                  <th className="center">Sl No</th>
+                  <th className="center">Release</th>
+                  <th>Feature Summary</th>
+                  <th>Release Type</th>
+                  <th>Release Signoff Date</th>
+                  <th className="center">Release Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data &&
+                  data.map((element) => (
+                    <FrontendList
+                      key={element.id}
+                      id={element.id}
+                      data={element}
+                    />
+                  ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    );
-  }
-}
+      ) : option === "2" ? (
+        props.history.push("/dev/existingrelease/daily")
+      ) : // <Daily />
+      option === "1" ? (
+        props.history.push("/dev/existingrelease/all")
+      ) : // <Frontend />
+      option === "4" ? (
+        props.history.push("/dev/existingrelease/hotfix")
+      ) : (
+        // <Hotfix />
+        <> </>
+      )}
+      <div className="padding-top-20px"></div>
+    </div>
+  );
+};
 
-export default Frontend;
+export default withRouter(Frontend);

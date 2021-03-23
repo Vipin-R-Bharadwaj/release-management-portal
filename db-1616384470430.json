@@ -1,0 +1,61 @@
+{
+  "frontend": {
+    "id": 1,
+    "featuresSummary": "PWA autologin for new lead with out loan app creation.Page insight score improvement.reduced Time to Interactive",
+    "platform": "PWA",
+    "releaseType": "Feature",
+    "releaseVersion": "release/R02-03-21",
+    "impact": "Medium",
+    "impactAreas": "Start to Eligible funnel",
+    "developerPOC": "Uttam",
+    "qaPOC": "Aru",
+    "releaseSignOffDate": "March 2",
+    "releaseDate": "March 3",
+    "releasePercentage": "100%",
+    "releaseWindow": "morning"
+  },
+  "backend": {
+    "id": 2,
+    "featuresSummary": null,
+    "platform": null,
+    "releaseType": null,
+    "releaseVersion": null,
+    "impact": null,
+    "impactAreas": null,
+    "developerPOC": null,
+    "qaPOC": null,
+    "releaseSignOffDate": null,
+    "releaseDate": null,
+    "releasePercentage": null,
+    "releaseWindow": null
+  },
+  "hotfix": {
+    "id": 3,
+    "featuresSummary": null,
+    "platform": null,
+    "releaseType": null,
+    "releaseVersion": null,
+    "impact": null,
+    "impactAreas": null,
+    "developerPOC": null,
+    "qaPOC": null,
+    "releaseSignOffDate": null,
+    "releaseDate": null,
+    "releasePercentage": null,
+    "releaseWindow": null
+  },
+  "login": {
+    "1": {
+      "eid": "1234",
+      "emailId": "vipin@moneyview.in",
+      "pwd": "qwerty",
+      "role": "dev"
+    },
+    "2": {
+      "eid": "2345",
+      "emailId": "drupad@moneyview.in",
+      "pwd": "qwerty",
+      "role": "manager"
+    }
+  }
+}

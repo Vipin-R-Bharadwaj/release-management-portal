@@ -97,7 +97,6 @@ class Frontend extends Component {
       btnWidth: "m2",
     },
   ];
-
   dateOptions = [
     { id: "releaseSignOffDate", disabled: true },
     { id: "releaseDate", disabled: false },
@@ -121,23 +120,8 @@ class Frontend extends Component {
 
   submitHandler = (event) => {
     event.preventDefault();
-    console.log(this.state);
-    var validate = 0;
     var stateArray = [];
     stateArray.push(Object.entries(this.state));
-    console.log(stateArray.pop());
-    for (var i = 0; i < stateArray.length; i++) {
-      // if (stateArray[1] !== null) {
-      //   validate++;
-      // }
-    }
-    console.log(validate);
-
-    // validate === 9
-    //   ? ValidateURL(this.state.prLink)
-    //     ? console.log(this.state)
-    //     : alert("Enter Valid PR Link")
-    //   : alert("All fields Mandatory");
   };
   render() {
     return (

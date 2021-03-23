@@ -1,52 +1,85 @@
-import { Component } from "react";
-import Frontend from "./frontend/Frontend";
-import Hotfix from "./hotfix/Hotfix";
-import CreatableSelect from "react-select/creatable";
-import Daily from "./daily/Daily";
+import { Link } from "react-router-dom";
 
-class NewDashboard extends Component {
-  state = {
-    option: null,
-    optionList: [
-      { label: "Hotfix Relese", value: "1" },
-      { label: "Daily Release", value: "2" },
-      { label: "Frontend Release", value: "3" },
-    ],
-  };
-  clickHandler = (event) => {
-    if (event !== null) {
-      const option = event.value;
-      this.setState({ option });
-    }
-  };
-  render() {
-    return (
-      <div className="container">
-        <div className="padding-top-10px"></div>
-        <CreatableSelect
-          placeholder="Select Release Type"
-          // isClearable
-          options={this.state.optionList}
-          onChange={(event) => {
-            this.clickHandler(event);
-          }}
-          defaultValue="Select release type"
-          maxMenuHeight={150}
-        />
-        {this.state.option === "1" ? (
-          <Hotfix />
-        ) : this.state.option === "2" ? (
-          <Daily />
-        ) : this.state.option === "3" ? (
-          <Frontend />
-        ) : (
-          <>
-            <p>Nothing Selected</p>
-          </>
-        )}
+const NewDashboard = () => {
+  return (
+    <div>
+      <div className="padding-top-40px"></div>
+      <div className="row padding-top-40px">
+        <div className="col s12 m4">
+          <div className="cardPadding">
+            <Link to="/dev/newrelease/daily">
+              <div className="card formStyle2 hoverable light-green">
+                <div className="padding-top-20px"></div>
+                <div className="card-title white-text">
+                  <b>Daily Release</b>
+                </div>
+                <div className="padding-top-20px"></div>
+                <div class="card-panel">
+                  <span>
+                    <input disabled id="item" type="text" class="validate" />
+                    <label for="item">Item</label>
+                    <input disabled id="pod" type="text" class="validate" />
+                    <label for="pod">POD</label>
+                    <input disabled id="releaseType" type="text" />
+                    <label for="releaseType">Release Type</label>
+                  </span>
+                  <div className="padding-top-20px"></div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+
+        <div className="col s12 m4">
+          <div className="cardPadding">
+            <Link to="/dev/newrelease/frontend">
+              <div className="card formStyle2 hoverable light-green">
+                <div className="padding-top-20px"></div>
+                <div className="card-title white-text">Frontend Release</div>
+                <div className="padding-top-20px"></div>
+                <div class="card-panel">
+                  <span class="white-text">
+                    <input disabled id="item" type="text" class="validate" />
+                    <label for="item">Item</label>
+                    <input disabled id="pod" type="text" class="validate" />
+                    <label for="pod">POD</label>
+                    <input disabled id="releaseType" type="text" />
+                    <label for="releaseType">Release Type</label>
+                  </span>
+                  <div className="padding-top-20px"></div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+        <div className="col s12 m4">
+          <div className="cardPadding">
+            <Link to="/dev/newrelease/hotfix">
+              <div className="card formStyle2 hoverable light-green">
+                <div className="padding-top-20px"></div>
+                <div className="card-title white-text">Hotfix Release</div>
+                <div className="padding-top-20px"></div>
+                <div class="card-panel lime-text text-darken-4">
+                  <span>
+                    <input disabled id="item" type="text" class="validate" />
+                    <label for="item">Item</label>
+                    <input disabled id="pod" type="text" class="validate" />
+                    <label for="pod">POD</label>
+                    <input disabled id="releaseType" type="text" />
+                    <label for="releaseType">Release Type</label>
+                  </span>
+                  <div className="padding-top-20px"></div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
       </div>
-    );
-  }
-}
+      <div className="padding-top-40px"></div>
+      <div className="padding-top-40px"></div>
+      <div className="padding-top-40px"></div>
+    </div>
+  );
+};
 
 export default NewDashboard;
