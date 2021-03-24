@@ -11,23 +11,16 @@ const Form = ({ submitHandler, changeHandler }) => {
           <div className="divider"></div>
           <div className="loginFormPadding">
             <form onSubmit={(event) => submitHandler(event)}>
-              {/* Employee id field */}
-              <Input
-                inputId="eid"
-                inputType="number"
-                inputText="Employee ID"
-                changeHandler={changeHandler}
-              />
               {/* Email input field */}
               <Input
-                inputId="emailId"
+                inputId="email"
                 inputType="Email"
                 inputText="Email"
                 changeHandler={changeHandler}
               />
               {/* Password input field */}
               <Input
-                inputId="pwd"
+                inputId="password"
                 inputType="Password"
                 inputText="Password"
                 changeHandler={changeHandler}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import NewDashboard from "../user/dev/new_release/NewDashboard";
+import DevNewDashboard from "../user/dev/new_release/DevNewDashboard";
 import Dashboard from "../user/dev/existing_release/Dashboard";
 import ReleaseOptions from "../user/dev/ReleaseOptions";
 
@@ -9,7 +9,7 @@ const LoginSuccess = () => {
   const clickHandler = (value) => {
     btnOption = value.target.id;
     if (btnOption === "New Release") {
-      setDisplay(<NewDashboard />);
+      setDisplay(<DevNewDashboard />);
     } else {
       setDisplay(<Dashboard />);
     }

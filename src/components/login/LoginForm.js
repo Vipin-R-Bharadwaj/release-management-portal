@@ -4,63 +4,64 @@ import pageImg from "../../images/page_img.png";
 // import ValidateInput from "../../validation/ValidateInput";
 import { withRouter } from "react-router";
 import useFetch from "../../useFetch";
+import { useEffect } from "react";
 
 const LoginForm = (props) => {
-  const [eid, setEid] = useState("");
-  const [pwd, setpwd] = useState("");
-  const [emailId, setEmailId] = useState("");
+  const [password, setpassword] = useState("");
+  const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   // const [loginData, setLoginData] = useState(null);
   const Data = useFetch("http://localhost:8000/login");
 
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+
   const changeHandler = (event) => {
-    if (event.target.id === "eid") {
-      setEid(event.target.value);
-    } else if (event.target.id === "pwd") {
-      setpwd(event.target.value);
-    } else if (event.target.id === "emailId") {
-      setEmailId(event.target.value);
+    if (event.target.id === "password") {
+      setpassword(event.target.value);
+    } else if (event.target.id === "email") {
+      setEmail(event.target.value);
     }
+  };
+
+  const loginSuccess = (role, eid) => {
+    localStorage.setItem(
+      "credentials",
+      JSON.stringify({
+        eid: eid,
+        email: email,
+        password: password,
+        role: role,
+      })
+    );
+    role === "developer"
+      ? props.history.push({ pathname: "/dev/newrelease", role: "dev" })
+      : props.history.push({
+          pathname: "/manager/newrelease",
+          role: "manager",
+        });
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
     const parsedData = Data && Object.keys(Data).map((key) => [key, Data[key]]);
     const loginStatus = parsedData.filter((data) => {
-      if (data[1].eid === eid) return data[1];
+      if (data[1].email === email) return data[1];
       return null;
     });
-    if(loginStatus.length !== 0) {
-      if(loginStatus[0][1].emailId === emailId && loginStatus[0][1].pwd === pwd) {
-        const api_call = await fetch(`http://localhost:8088/user/`);
-        const data = await api_call.json();
-        console.log(data);
-      }
-      else {
-        setErrorMessage(
-          <h2 className="red-text text-accent-3">LOGIN FAILED!</h2>
-        )
-      }
-    }
-    else {
-      setErrorMessage(
-        <h2 className="red-text text-accent-3">Invalid Credentials!</h2>
-      );
-    }
-    // loginStatus.length !== 0
-    //   ? loginStatus[0][1].emailId === emailId && loginStatus[0][1].pwd === pwd
-    //     ? loginStatus[0][1].role === "developer"
-    //       ? props.history.push({ pathname: "/dev/newrelease", role: "dev" })
-    //       : props.history.push({
-    //           pathname: "/manager/newrelease",
-    //           role: "manager",
-    //         })
-    //     : setErrorMessage(
-    //         <h2 className="red-text text-accent-3">LOGIN FAILED!</h2>
-    //       )
-    //   : setErrorMessage(
-    //       <h2 className="red-text text-accent-3">Invalid Credentials!</h2>
-    //     );
+
+    // console.log(localStorage.getItem("credentials"));
+    loginStatus.length !== 0
+      ? loginStatus[0][1].email === email &&
+        loginStatus[0][1].password === password
+        ? loginSuccess(loginStatus[0][1].role, loginStatus[0][1].eid)
+        : setErrorMessage(
+            <h2 className="red-text text-accent-3">LOGIN FAILED!</h2>
+          )
+      : setErrorMessage(
+          <h2 className="red-text text-accent-3">Invalid Credentials!</h2>
+        );
   };
 
   return (

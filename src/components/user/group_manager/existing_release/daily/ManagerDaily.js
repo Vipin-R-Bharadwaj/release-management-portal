@@ -1,11 +1,11 @@
 import { useState } from "react";
 import useFetch from "../../../../../useFetch";
-import HotfixList from "./HotfixList";
 import CreatableSelect from "react-select/creatable";
 import { withRouter } from "react-router";
+import DailyList from "./DailyList";
 
-const Frontend = (props) => {
-  const data = useFetch("http://localhost:8000/hotfix");
+const ManagerDaily = (props) => {
+  const data = useFetch("http://localhost:8000/daily");
   // const parsedData = Object.keys(data).map((key) => [key, data[key]]);
   const optionList = [
     { label: "All", value: "1" },
@@ -13,7 +13,7 @@ const Frontend = (props) => {
     { label: "Frontend Release", value: "3" },
     { label: "Hotfix Relese", value: "4" },
   ];
-  const [option, setOption] = useState("4");
+  const [option, setOption] = useState("2");
   const clickHandler = (event) => {
     if (event !== null) {
       setOption(event.value);
@@ -33,7 +33,7 @@ const Frontend = (props) => {
         defaultValue="Select release type"
         maxMenuHeight={150}
       />
-      {option === "4" ? (
+      {option === "2" ? (
         <div className="row">
           <div className="padding-top-20px">
             <table className="highlight striped white">
@@ -50,7 +50,7 @@ const Frontend = (props) => {
               <tbody>
                 {data &&
                   data.map((element) => (
-                    <HotfixList
+                    <DailyList
                       key={element.id}
                       id={element.id}
                       data={element}
@@ -60,14 +60,14 @@ const Frontend = (props) => {
             </table>
           </div>
         </div>
-      ) : option === "2" ? (
-        props.history.push("/dev/existingrelease/daily")
+      ) : option === "1" ? (
+        props.history.push("/manager/existingrelease/all")
       ) : // <Daily />
-      option === "1" ? (
-        props.history.push("/dev/existingrelease/all")
-      ) : // <Frontend />
       option === "3" ? (
-        props.history.push("/dev/existingrelease/frontend")
+        props.history.push("/manager/existingrelease/frontend")
+      ) : // <Frontend />
+      option === "4" ? (
+        props.history.push("/manager/existingrelease/hotfix")
       ) : (
         // <Hotfix />
         <> </>
@@ -77,4 +77,4 @@ const Frontend = (props) => {
   );
 };
 
-export default withRouter(Frontend);
+export default withRouter(ManagerDaily);

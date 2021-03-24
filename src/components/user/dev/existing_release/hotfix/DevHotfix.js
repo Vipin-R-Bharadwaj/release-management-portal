@@ -1,10 +1,10 @@
 import { useState } from "react";
 import useFetch from "../../../../../useFetch";
-import HotfixList from "./HotfixList";
+import DevHotfixList from "./DevHotfixList";
 import CreatableSelect from "react-select/creatable";
 import { withRouter } from "react-router";
 
-const Frontend = (props) => {
+const DevFrontend = (props) => {
   const data = useFetch("http://localhost:8000/hotfix");
   // const parsedData = Object.keys(data).map((key) => [key, data[key]]);
   const optionList = [
@@ -50,7 +50,7 @@ const Frontend = (props) => {
               <tbody>
                 {data &&
                   data.map((element) => (
-                    <HotfixList
+                    <DevHotfixList
                       key={element.id}
                       id={element.id}
                       data={element}
@@ -77,4 +77,4 @@ const Frontend = (props) => {
   );
 };
 
-export default withRouter(Frontend);
+export default withRouter(DevFrontend);

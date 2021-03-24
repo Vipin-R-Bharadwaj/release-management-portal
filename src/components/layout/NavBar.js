@@ -6,7 +6,18 @@ import ManagerLinks from "./ManagerLinks";
 
 const NavBar = (props) => {
   const showLinks =
-    props.location.pathname !== "/" ? <DeveloperLinks /> : <> </>;
+    props.location.pathname !== "/" ? (
+      <>
+        {JSON.parse(localStorage.getItem("credentials")).role ===
+        "developer" ? (
+          <DeveloperLinks />
+        ) : (
+          <ManagerLinks />
+        )}
+      </>
+    ) : (
+      <> </>
+    );
   return (
     <div>
       <nav className="navHeight">

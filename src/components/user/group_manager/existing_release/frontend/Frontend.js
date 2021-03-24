@@ -1,196 +1,80 @@
-// import { useParams } from "react-router";
-// import useFetch from "../../../../../useFetch";
-// import Button from "./Button";
-// import DatePickerHOC from "./DatePickerHOC";
-// import Input from "./Input";
+import { useState } from "react";
+import useFetch from "../../../../../useFetch";
+import FrontendList from "./FrontendList";
+import CreatableSelect from "react-select/creatable";
+import { withRouter } from "react-router";
 
-// const Frontend = () => {
-//   const { id } = useParams();
-//   // const [releases, setReleases] = useState(null);
-//   const data = useFetch("http://localhost:8000/frontend");
+const Frontend = (props) => {
+  const data = useFetch("http://localhost:8000/frontend");
+  // const parsedData = Object.keys(data).map((key) => [key, data[key]]);
+  const optionList = [
+    { label: "All", value: "1" },
+    { label: "Daily Release", value: "2" },
+    { label: "Frontend Release", value: "3" },
+    { label: "Hotfix Relese", value: "4" },
+  ];
+  const [option, setOption] = useState("3");
+  const clickHandler = (event) => {
+    if (event !== null) {
+      setOption(event.value);
+    }
+  };
+  return (
+    <div className="container">
+      {/* <div className="container"> */}
+      <div className="padding-top-20px"></div>
+      <CreatableSelect
+        placeholder="All"
+        // isClearable
+        options={optionList}
+        onChange={(event) => {
+          clickHandler(event);
+        }}
+        defaultValue="Select release type"
+        maxMenuHeight={150}
+      />
+      {option === "3" ? (
+        <div className="row">
+          <div className="padding-top-20px">
+            <table className="highlight striped white">
+              <thead>
+                <tr>
+                  <th className="center">Sl No</th>
+                  <th className="center">Release</th>
+                  <th>Feature Summary</th>
+                  <th>Release Type</th>
+                  <th>Release Signoff Date</th>
+                  <th className="center">Release Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data &&
+                  data.map((element) => (
+                    <FrontendList
+                      key={element.id}
+                      id={element.id}
+                      data={element}
+                    />
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ) : option === "2" ? (
+        props.history.push("/dev/existingrelease/daily")
+      ) : // <Daily />
+      option === "1" ? (
+        props.history.push("/dev/existingrelease/all")
+      ) : // <Frontend />
+      option === "4" ? (
+        props.history.push("/dev/existingrelease/hotfix")
+      ) : (
+        // <Hotfix />
+        <> </>
+      )}
+      <div className="padding-top-20px"></div>
+    </div>
+  );
+};
 
-//   const submitHandler = (event) => {
-//     event.preventDefault();
-//     console.log("Form submitted!");
-//   };
-
-//   const inputOptions1 = [
-//     {
-//       btnID: "featuresSummary",
-//       btnType: "text",
-//       btnClass: "validate",
-//       btnText: "Features Summary",
-//       btnWidth: "m12",
-//       btnValue: data && data[1][1],
-//     },
-//   ];
-//   const inputOptions2 = [
-//     {
-//       btnID: "platform",
-//       btnType: "text",
-//       btnClass: "",
-//       btnText: "Platform",
-//       btnWidth: "m4",
-//       btnValue: data && data[2][1],
-//     },
-//     {
-//       btnID: "releaseType",
-//       btnType: "text",
-//       btnClass: "",
-//       btnText: "Release Type",
-//       btnWidth: "m4",
-//       btnValue: data && data[3][1],
-//     },
-//     {
-//       btnID: "releaseVersion",
-//       btnType: "text",
-//       btnClass: "materialize-textarea",
-//       btnText: "Release Version",
-//       btnWidth: "m4",
-//       btnValue: data && data[4][1],
-//     },
-//   ];
-//   const inputOptions3 = [
-//     {
-//       btnID: "impact",
-//       btnType: "text",
-//       btnClass: "",
-//       btnText: "Impact",
-//       btnWidth: "m3",
-//       btnValue: data && data[5][1],
-//     },
-//     {
-//       btnID: "impactAreas",
-//       btnType: "text",
-//       btnClass: "",
-//       btnText: "Impact Areas",
-//       btnWidth: "m3",
-//       btnValue: data && data[6][1],
-//     },
-//     {
-//       btnID: "developerPOC",
-//       btnType: "text",
-//       btnClass: "",
-//       btnText: "Developer Point of Contact",
-//       btnWidth: "m3",
-//       btnValue: data && data[7][1],
-//     },
-//     {
-//       btnID: "qaPOC",
-//       btnType: "text",
-//       btnClass: "",
-//       btnText: "QA Point of Contact",
-//       btnWidth: "m3",
-//       btnValue: data && data[8][1],
-//     },
-//   ];
-//   const inputOptions4 = [
-//     {
-//       btnID: "releasePercentage",
-//       btnType: "text",
-//       btnClass: "",
-//       btnText: "Release Percentage",
-//       btnWidth: "m3",
-//       btnValue: data && data[11][1],
-//     },
-//     {
-//       btnID: "releaseWindow",
-//       btnType: "text",
-//       btnClass: "",
-//       btnText: "Release Window",
-//       btnWidth: "m3",
-//       btnValue: data && data[12][1],
-//     },
-//   ];
-//   const dateOptions = [
-//     {
-//       id: "releaseSignOffDate",
-//       name: "Release SignOff Date",
-//       width: "m3",
-//       disabled: true,
-//       btnValue: data && data[9][1],
-//     },
-//     {
-//       id: "releaseDate",
-//       name: "Release Date",
-//       width: "m3",
-//       disabled: false,
-//       btnValue: data && data[10][1],
-//     },
-//   ];
-
-//   return (
-//     <div className="container">
-//       <div className="card z-depth-2 formStyle1">
-//         <div className="padding-top-20px">
-//           <form onSubmit={(event) => submitHandler(event)}>
-//             <div className="row">
-//               <div className="left">
-//                 <button className="btn btn-floating red">{id}</button>
-//               </div>
-//             </div>
-//             <Input
-//               key={inputOptions1[0].btnID}
-//               btnID={inputOptions1[0].btnID}
-//               btnType={inputOptions1[0].btnType}
-//               btnClass={inputOptions1[0].btnClass}
-//               btnText={inputOptions1[0].btnText}
-//               btnWidth={inputOptions1[0].btnWidth}
-//               btnValue={inputOptions1[0].btnValue}
-//               // changeHandler={this.changeHandler}
-//             />
-//             {[inputOptions2, inputOptions3].map((option) => (
-//               <div className="row">
-//                 {option.map((element) => (
-//                   <Input
-//                     key={element.btnID}
-//                     btnID={element.btnID}
-//                     btnType={element.btnType}
-//                     btnClass={element.btnClass}
-//                     btnText={element.btnText}
-//                     btnWidth={element.btnWidth}
-//                     btnValue={element.btnValue}
-//                     // changeHandler={this.changeHandler}
-//                   />
-//                 ))}
-//               </div>
-//             ))}
-//             <div className="row">
-//               {inputOptions4.map((element) => (
-//                 <Input
-//                   key={element.btnID}
-//                   btnID={element.btnID}
-//                   btnType={element.btnType}
-//                   btnClass={element.btnClass}
-//                   btnText={element.btnText}
-//                   btnWidth={element.btnWidth}
-//                   btnValue={element.btnValue}
-//                   // changeHandler={this.changeHandler}
-//                 />
-//               ))}
-//               {dateOptions.map((element) => (
-//                 <DatePickerHOC
-//                   key={element.id}
-//                   id={element.id}
-//                   name={element.name}
-//                   width={element.width}
-//                   disabled={element.disabled}
-//                   btnValue={element.btnValue}
-
-//                   // changeHandler={this.dateHandler}
-//                 />
-//               ))}
-//             </div>
-//             <div className="input-field col s12 center">
-//               <Button />
-//               {/* <Button submitHandler={submitHandler} /> */}
-//             </div>
-//             <div className="padding-top-10px"></div>
-//           </form>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Frontend;
+export default withRouter(Frontend);

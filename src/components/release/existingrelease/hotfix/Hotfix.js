@@ -1,10 +1,10 @@
 import { useState } from "react";
-import useFetch from "../../../../../useFetch";
+import useFetch from "../../../../useFetch";
 import HotfixList from "./HotfixList";
 import CreatableSelect from "react-select/creatable";
 import { withRouter } from "react-router";
 
-const Frontend = (props) => {
+const Hotfix = (props) => {
   const data = useFetch("http://localhost:8000/hotfix");
   // const parsedData = Object.keys(data).map((key) => [key, data[key]]);
   const optionList = [
@@ -24,7 +24,7 @@ const Frontend = (props) => {
       {/* <div className="container"> */}
       <div className="padding-top-20px"></div>
       <CreatableSelect
-        placeholder="All"
+        placeholder="Hotfix"
         // isClearable
         options={optionList}
         onChange={(event) => {
@@ -61,13 +61,25 @@ const Frontend = (props) => {
           </div>
         </div>
       ) : option === "2" ? (
-        props.history.push("/dev/existingrelease/daily")
+        props.history.push(
+          `/${
+            JSON.parse(localStorage.getItem("credentials")).role
+          }/existingrelease/daily`
+        )
       ) : // <Daily />
       option === "1" ? (
-        props.history.push("/dev/existingrelease/all")
+        props.history.push(
+          `/${
+            JSON.parse(localStorage.getItem("credentials")).role
+          }/existingrelease/all`
+        )
       ) : // <Frontend />
       option === "3" ? (
-        props.history.push("/dev/existingrelease/frontend")
+        props.history.push(
+          `/${
+            JSON.parse(localStorage.getItem("credentials")).role
+          }/existingrelease/frontend`
+        )
       ) : (
         // <Hotfix />
         <> </>
@@ -77,4 +89,4 @@ const Frontend = (props) => {
   );
 };
 
-export default withRouter(Frontend);
+export default withRouter(Hotfix);

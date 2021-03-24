@@ -1,19 +1,18 @@
-import { useState } from "react";
-import useFetch from "../../../../../useFetch";
-import HotfixList from "./HotfixList";
+import { useState, useEffect } from "react";
+import useFetch from "../../../../useFetch";
 import CreatableSelect from "react-select/creatable";
+import DevExistingReleaseList from "../release/DevExistingReleaseList";
 import { withRouter } from "react-router";
 
-const Frontend = (props) => {
-  const data = useFetch("http://localhost:8000/hotfix");
-  // const parsedData = Object.keys(data).map((key) => [key, data[key]]);
+const DevDashboard = (props) => {
+  const data = useFetch("http://localhost:8000/all");
   const optionList = [
     { label: "All", value: "1" },
     { label: "Daily Release", value: "2" },
     { label: "Frontend Release", value: "3" },
     { label: "Hotfix Relese", value: "4" },
   ];
-  const [option, setOption] = useState("4");
+  const [option, setOption] = useState("1");
   const clickHandler = (event) => {
     if (event !== null) {
       setOption(event.value);
@@ -33,7 +32,7 @@ const Frontend = (props) => {
         defaultValue="Select release type"
         maxMenuHeight={150}
       />
-      {option === "4" ? (
+      {option === "1" ? (
         <div className="row">
           <div className="padding-top-20px">
             <table className="highlight striped white">
@@ -50,7 +49,7 @@ const Frontend = (props) => {
               <tbody>
                 {data &&
                   data.map((element) => (
-                    <HotfixList
+                    <DevExistingReleaseList
                       key={element.id}
                       id={element.id}
                       data={element}
@@ -63,11 +62,11 @@ const Frontend = (props) => {
       ) : option === "2" ? (
         props.history.push("/dev/existingrelease/daily")
       ) : // <Daily />
-      option === "1" ? (
-        props.history.push("/dev/existingrelease/all")
-      ) : // <Frontend />
       option === "3" ? (
         props.history.push("/dev/existingrelease/frontend")
+      ) : // <Frontend />
+      option === "4" ? (
+        props.history.push("/dev/existingrelease/hotfix")
       ) : (
         // <Hotfix />
         <> </>
@@ -77,4 +76,4 @@ const Frontend = (props) => {
   );
 };
 
-export default withRouter(Frontend);
+export default withRouter(DevDashboard);

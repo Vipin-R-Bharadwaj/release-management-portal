@@ -14,16 +14,16 @@ const DevNewDashboard = () => {
                   <b>Daily Release</b>
                 </div>
                 <div className="padding-top-20px"></div>
-                <div classname="card-panel">
+                <div className="card-panel">
                   <span>
                     <input
                       disabled
                       id="item"
                       type="text"
-                      classname="validate"
+                      className="validate"
                     />
                     <label htmlfor="item">Item</label>
-                    <input disabled id="pod" type="text" classname="validate" />
+                    <input disabled id="pod" type="text" className="validate" />
                     <label htmlfor="pod">POD</label>
                     <input disabled id="releaseType" type="text" />
                     <label htmlfor="releaseType">Release Type</label>
@@ -42,16 +42,16 @@ const DevNewDashboard = () => {
                 <div className="padding-top-20px"></div>
                 <div className="card-title white-text">Frontend Release</div>
                 <div className="padding-top-20px"></div>
-                <div classname="card-panel">
-                  <span classname="white-text">
+                <div className="card-panel">
+                  <span className="white-text">
                     <input
                       disabled
                       id="item"
                       type="text"
-                      classname="validate"
+                      className="validate"
                     />
                     <label htmlfor="item">Item</label>
-                    <input disabled id="pod" type="text" classname="validate" />
+                    <input disabled id="pod" type="text" className="validate" />
                     <label htmlfor="pod">POD</label>
                     <input disabled id="releaseType" type="text" />
                     <label htmlfor="releaseType">Release Type</label>
@@ -69,16 +69,16 @@ const DevNewDashboard = () => {
                 <div className="padding-top-20px"></div>
                 <div className="card-title white-text">Hotfix Release</div>
                 <div className="padding-top-20px"></div>
-                <div classname="card-panel lime-text text-darken-4">
+                <div className="card-panel lime-text text-darken-4">
                   <span>
                     <input
                       disabled
                       id="item"
                       type="text"
-                      classname="validate"
+                      className="validate"
                     />
                     <label htmlfor="item">Item</label>
-                    <input disabled id="pod" type="text" classname="validate" />
+                    <input disabled id="pod" type="text" className="validate" />
                     <label htmlfor="pod">POD</label>
                     <input disabled id="releaseType" type="text" />
                     <label htmlfor="releaseType">Release Type</label>
