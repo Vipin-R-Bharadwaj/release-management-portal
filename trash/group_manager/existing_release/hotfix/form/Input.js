@@ -4,7 +4,6 @@ const Input = ({
   btnClass,
   changeHandler,
   btnText,
-  btnValue,
   btnWidth,
 }) => {
   const divClass = "input-field col s12 " + btnWidth;

@@ -1,11 +1,11 @@
 import { Component } from "react";
-import ValidateURL from "../../../../../validation/ValidateURL";
-import Input from "./Input";
-import Button from "./Button";
-import DatePickerHOC from "./DatePickerHOC";
 import { withRouter } from "react-router";
+// import ValidateURL from "../../../../../validation/ValidateURL";
+import Button from "./Button";
+import DatePicker from "./DatePicker";
+import Input from "./Input";
 
-class DevDailyForm extends Component {
+class HotfixForm extends Component {
   state = {
     item: null,
     pod: null,
@@ -18,22 +18,19 @@ class DevDailyForm extends Component {
     tor: null,
     prLink: null,
     releaseDate: null,
-    techPRSignoffDate: null,
-    sqlApproval: null,
+    releaseWindow: null,
+    approvedBy: null,
     heavySQLAlter: null,
-    qaPOC: null,
-    stageQASignoffDate: null,
-    integrationQASignoffDate: null,
-    rollOut: null,
-    requiresBAR: null,
-    barDate: null,
+    qaBy: null,
+    srd: null,
+    soh: null,
   };
 
   inputOptions1 = [
     {
       btnID: "item",
       btnType: "text",
-      btnClass: "validate",
+      btnClass: "",
       btnText: "Item",
       btnWidth: "m6",
     },
@@ -74,7 +71,7 @@ class DevDailyForm extends Component {
       btnType: "text",
       btnClass: "",
       btnText: "Impact Areas",
-      btnWidth: "m3",
+      btnWidth: "m4",
     },
     {
       btnID: "releaseStatus",
@@ -96,7 +93,7 @@ class DevDailyForm extends Component {
       btnID: "tor",
       btnType: "text",
       btnClass: "",
-      btnText: "TOR",
+      btnText: "Type of Release",
       btnWidth: "m6",
     },
   ];
@@ -104,56 +101,61 @@ class DevDailyForm extends Component {
     {
       btnID: "prLink",
       btnType: "text",
-      btnClass: "materialize-textarea",
+      btnClass: "",
       btnText: "PR Link",
       btnWidth: "m9",
     },
   ];
   inputOptions6 = [
     {
-      btnID: "sqlApproval",
+      btnID: "releaseWindow",
       btnType: "text",
-      btnClass: "text",
-      btnText: "SQL Approval",
-      btnWidth: "m3",
+      btnClass: "",
+      btnText: "Release Window",
+      btnWidth: "m4",
+    },
+    {
+      btnID: "approvedBy",
+      btnType: "text",
+      btnClass: "",
+      btnText: "Approved By",
+      btnWidth: "m4",
     },
     {
       btnID: "heavySQLAlter",
       btnType: "text",
       btnClass: "",
       btnText: "Heavy SQL Alter",
-      btnWidth: "m3",
-    },
-    {
-      btnID: "qaPOC",
-      btnType: "text",
-      btnClass: "",
-      btnText: "QA POC",
-      btnWidth: "m3",
+      btnWidth: "m4",
     },
   ];
   inputOptions7 = [
     {
-      btnID: "rollOut",
-      btnType: "text",
-      btnClass: "text",
-      btnText: "Rollout",
-      btnWidth: "m2",
-    },
-    {
-      btnID: "requiresBAR",
+      btnID: "qaBy",
       btnType: "text",
       btnClass: "",
-      btnText: "Requires BAR",
-      btnWidth: "m2",
+      btnText: "QA By",
+      btnWidth: "m4",
     },
     {
-      btnID: "barDate",
+      btnID: "srd",
       btnType: "text",
       btnClass: "",
-      btnText: "BAR Date",
-      btnWidth: "m2",
+      btnText: "Source Release Date",
+      btnWidth: "m4",
     },
+    {
+      btnID: "soh",
+      btnType: "text",
+      btnClass: "",
+      btnText: "Source of Hotfix",
+      btnWidth: "m4",
+    },
+  ];
+
+  dateOptions = [
+    { id: "releaseDate", disabled: false },
+    { id: "releaseDate", disabled: false },
   ];
 
   changeHandler = (event) => {
@@ -164,14 +166,18 @@ class DevDailyForm extends Component {
   submitHandler = (event) => {
     event.preventDefault();
     console.log("Form Submitted!");
-    this.props.history.push("/dev/newrelease");
+    this.props.history.push(
+      `/${JSON.parse(localStorage.getItem("credentials")).role}/newrelease`
+    );
     // ValidateURL(this.state.prLink)
     //   ? console.log(this.state)
     //   : alert("Enter Valid PR Link");
   };
   backHandler = (event) => {
     event.preventDefault();
-    this.props.history.push("/dev/newrelease");
+    this.props.history.push(
+      `/${JSON.parse(localStorage.getItem("credentials")).role}/newrelease`
+    );
   };
 
   render() {
@@ -180,19 +186,19 @@ class DevDailyForm extends Component {
         <div className="padding-top-40px"></div>
         <div className="container center">
           <div className="card z-depth-2 formStyle1">
-            <h2 className="red-text text-darken-1">Daily Release</h2>
+            <h2 className="red-text text-darken-1">Hotfix Release</h2>
             <div className="padding-top-20px"></div>
             <div className="divider"></div>
             <div className="padding-top-20px">
               <form onSubmit={(event) => this.submitHandler(event)}>
                 {[
-                  [this.inputOptions1, 0],
-                  [this.inputOptions2, 1],
-                  [this.inputOptions3, 2],
-                  [this.inputOptions4, 3],
+                  this.inputOptions1,
+                  this.inputOptions2,
+                  this.inputOptions3,
+                  this.inputOptions4,
                 ].map((option) => (
-                  <div className="row" key={option[1]}>
-                    {option[0].map((element) => (
+                  <div className="row">
+                    {option.map((element) => (
                       <Input
                         key={element.btnID}
                         btnID={element.btnID}
@@ -206,64 +212,40 @@ class DevDailyForm extends Component {
                   </div>
                 ))}
                 <div className="row">
-                  <DatePickerHOC
-                    key={4}
-                    id="releaseDate"
-                    changeHandler={(event) => this.changeHandler(event)}
-                    disabled={true}
-                  />
+                  <div className="col s12 m3 valign-wrapper">
+                    <DatePicker
+                      id="releaseDate"
+                      changeHandler={(event) => this.changeHandler(event)}
+                      disabled={true}
+                    />
+                  </div>
                   {this.inputOptions5.map((element) => (
                     <Input
                       key={element.btnID}
                       btnID={element.btnID}
-                      btnClass={element.btnClass}
                       btnType={element.btnType}
+                      btnClass={element.btnClass}
                       btnText={element.btnText}
                       btnWidth={element.btnWidth}
-                    />
-                  ))}
-                </div>
-                <div className="row">
-                  <DatePickerHOC
-                    key={5}
-                    id="techPRSignoffDate"
-                    changeHandler={(event) => this.changeHandler(event)}
-                    disabled={true}
-                  />
-                  {this.inputOptions6.map((element) => (
-                    <Input
-                      key={element.btnID}
-                      btnID={element.btnID}
-                      btnClass={element.btnClass}
-                      btnType={element.btnType}
-                      btnText={element.btnText}
-                      btnWidth={element.btnWidth}
-                    />
-                  ))}
-                </div>
-                <div className="row">
-                  {[
-                    ["stageQASignoffDate", false, 6],
-                    ["integrationQASignoffDate", false, 7],
-                  ].map((element) => (
-                    <DatePickerHOC
-                      id={element[0]}
                       changeHandler={this.changeHandler}
-                      key={element[2]}
-                      disabled={element[1]}
-                    />
-                  ))}
-                  {this.inputOptions7.map((element) => (
-                    <Input
-                      key={element.btnID}
-                      btnID={element.btnID}
-                      btnClass={element.btnClass}
-                      btnType={element.btnType}
-                      btnText={element.btnText}
-                      btnWidth={element.btnWidth}
                     />
                   ))}
                 </div>
+                {[this.inputOptions6, this.inputOptions7].map((option) => (
+                  <div className="row">
+                    {option.map((element) => (
+                      <Input
+                        key={element.btnID}
+                        btnID={element.btnID}
+                        btnType={element.btnType}
+                        btnClass={element.btnClass}
+                        btnText={element.btnText}
+                        btnWidth={element.btnWidth}
+                        changeHandler={this.changeHandler}
+                      />
+                    ))}
+                  </div>
+                ))}
                 <div className="row">
                   <Button
                     btnName="Back"
@@ -290,4 +272,4 @@ class DevDailyForm extends Component {
   }
 }
 
-export default withRouter(DevDailyForm);
+export default withRouter(HotfixForm);

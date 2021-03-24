@@ -11,7 +11,7 @@ const ManagerLinks = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/manager/existingrelease">
+        <NavLink to="/manager/existingrelease/all">
           <button className="btn btn-flat white light-green-text text-darken-2 pulse">
             View Existing Release
           </button>

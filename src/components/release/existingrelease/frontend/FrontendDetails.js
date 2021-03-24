@@ -10,7 +10,11 @@ const FrontendDetails = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.history.replace("/dev/existingrelease/frontend");
+    props.history.replace(
+      `/${
+        JSON.parse(localStorage.getItem("credentials")).role
+      }/existingrelease/frontend`
+    );
   };
 
   const inputOptions1 = [

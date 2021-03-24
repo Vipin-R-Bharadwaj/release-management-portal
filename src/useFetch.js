@@ -4,8 +4,9 @@ const useFetch = (url) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    const abortCont = new AbortController();
-    fetch(url, { signal: abortCont.signal })
+    // const abortCont = new AbortController();
+    // fetch(url, { signal: abortCont.signal })
+    fetch(url)
       .then((res) => {
         if (!res.ok) {
           throw Error("Could not fetch data from endpoint");
@@ -20,7 +21,7 @@ const useFetch = (url) => {
       .catch((err) => {
         if (err.name === "AboutError") console.log(err);
       });
-    return () => abortCont.abort();
+    // return () => abortCont.abort();
   }, [url]);
   return data;
 };

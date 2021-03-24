@@ -1,13 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import useFetch from "../../../useFetch";
+// import newRelease from "../../../images/newRelease.gif";
 
-const DevNewDashboard = () => {
+const NewDashboard = () => {
+  const sqlApprovalArray = useFetch(
+    "http://localhost:8080/daily/getsqlqueriesapproval"
+  );
+  localStorage.setItem("sqlApprovalArray", JSON.stringify(sqlApprovalArray));
   return (
-    <div>
+    <div className="center">
       <div className="padding-top-40px"></div>
-      <div className="row padding-top-40px">
+      {/* <div>
+        <img src={newRelease} alt="" />
+      </div> */}
+      <div className="row">
         <div className="col s12 m4">
-          <div className="cardPadding">
-            <Link to="/dev/newrelease/daily">
+          <div className="dailyCardPadding">
+            <NavLink
+              to={`/${
+                JSON.parse(localStorage.getItem("credentials")).role
+              }/newrelease/daily`}
+            >
               <div className="card formStyle2 hoverable light-green">
                 <div className="padding-top-20px"></div>
                 <div className="card-title white-text">
@@ -22,22 +35,26 @@ const DevNewDashboard = () => {
                       type="text"
                       className="validate"
                     />
-                    <label htmlfor="item">Item</label>
+                    <label htmlFor="item">Item</label>
                     <input disabled id="pod" type="text" className="validate" />
-                    <label htmlfor="pod">POD</label>
+                    <label htmlFor="pod">POD</label>
                     <input disabled id="releaseType" type="text" />
-                    <label htmlfor="releaseType">Release Type</label>
+                    <label htmlFor="releaseType">Release Type</label>
                   </span>
-                  <div className="padding-top-20px"></div>
+                  <div className="padding-top-10px"></div>
                 </div>
               </div>
-            </Link>
+            </NavLink>
           </div>
         </div>
 
         <div className="col s12 m4">
-          <div className="cardPadding">
-            <Link to="/dev/newrelease/frontend">
+          <div className="frontendCardPadding">
+            <Link
+              to={`/${
+                JSON.parse(localStorage.getItem("credentials")).role
+              }/newrelease/frontend`}
+            >
               <div className="card formStyle2 hoverable light-green">
                 <div className="padding-top-20px"></div>
                 <div className="card-title white-text">Frontend Release</div>
@@ -50,21 +67,25 @@ const DevNewDashboard = () => {
                       type="text"
                       className="validate"
                     />
-                    <label htmlfor="item">Item</label>
+                    <label htmlFor="item">Item</label>
                     <input disabled id="pod" type="text" className="validate" />
-                    <label htmlfor="pod">POD</label>
+                    <label htmlFor="pod">POD</label>
                     <input disabled id="releaseType" type="text" />
-                    <label htmlfor="releaseType">Release Type</label>
+                    <label htmlFor="releaseType">Release Type</label>
                   </span>
-                  <div className="padding-top-20px"></div>
+                  <div className="padding-top-10px"></div>
                 </div>
               </div>
             </Link>
           </div>
         </div>
         <div className="col s12 m4">
-          <div className="cardPadding">
-            <Link to="/dev/newrelease/hotfix">
+          <div className="hotfixCardPadding">
+            <Link
+              to={`/${
+                JSON.parse(localStorage.getItem("credentials")).role
+              }/newrelease/hotfix`}
+            >
               <div className="card formStyle2 hoverable light-green">
                 <div className="padding-top-20px"></div>
                 <div className="card-title white-text">Hotfix Release</div>
@@ -77,24 +98,22 @@ const DevNewDashboard = () => {
                       type="text"
                       className="validate"
                     />
-                    <label htmlfor="item">Item</label>
+                    <label htmlFor="item">Item</label>
                     <input disabled id="pod" type="text" className="validate" />
-                    <label htmlfor="pod">POD</label>
+                    <label htmlFor="pod">POD</label>
                     <input disabled id="releaseType" type="text" />
-                    <label htmlfor="releaseType">Release Type</label>
+                    <label htmlFor="releaseType">Release Type</label>
                   </span>
-                  <div className="padding-top-20px"></div>
+                  <div className="padding-top-10px"></div>
                 </div>
               </div>
             </Link>
           </div>
         </div>
       </div>
-      <div className="padding-top-40px"></div>
-      <div className="padding-top-40px"></div>
-      <div className="padding-top-40px"></div>
+      {/* <div className="padding-top-20px"></div> */}
     </div>
   );
 };
 
-export default DevNewDashboard;
+export default NewDashboard;

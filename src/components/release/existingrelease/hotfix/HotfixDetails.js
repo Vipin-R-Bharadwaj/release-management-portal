@@ -10,7 +10,11 @@ const HotfixDetails = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.history.replace("/dev/existingrelease/hotfix");
+    props.history.replace(
+      `/${
+        JSON.parse(localStorage.getItem("credentials")).role
+      }/existingrelease/hotfix`
+    );
   };
   // state = {
   //   item: null,

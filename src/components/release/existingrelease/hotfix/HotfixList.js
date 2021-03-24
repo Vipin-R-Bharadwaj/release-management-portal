@@ -4,32 +4,62 @@ const HotfixList = ({ id, data }) => {
   return (
     <tr key={id}>
       <td className="slnoStyle">
-        <Link to={`/dev/existingrelease/hotfix/${id}`} className="black-text">
+        <Link
+          to={`/${
+            JSON.parse(localStorage.getItem("credentials")).role
+          }/existingrelease/hotfix/${id}`}
+          className="black-text"
+        >
           {data.id}
         </Link>
       </td>
       <td className="releaseStyle">
-        <Link to={`/dev/existingrelease/hotfix/${id}`} className="black-text">
+        <Link
+          to={`/${
+            JSON.parse(localStorage.getItem("credentials")).role
+          }/existingrelease/hotfix/${id}`}
+          className="black-text"
+        >
           {data.release}
         </Link>
       </td>
       <td className="summaryStyle">
-        <Link to={`/dev/existingrelease/hotfix/${id}`} className="black-text">
+        <Link
+          to={`/${
+            JSON.parse(localStorage.getItem("credentials")).role
+          }/existingrelease/hotfix/${id}`}
+          className="black-text"
+        >
           {data.featuresSummary}
         </Link>
       </td>
       <td className="center">
-        <Link to={`/dev/existingrelease/hotfix/${id}`} className="black-text">
+        <Link
+          to={`/${
+            JSON.parse(localStorage.getItem("credentials")).role
+          }/existingrelease/hotfix/${id}`}
+          className="black-text"
+        >
           {data.releaseType}
         </Link>
       </td>
       <td className="center">
-        <Link to={`/dev/existingrelease/hotfix/${id}`} className="black-text">
+        <Link
+          to={`/${
+            JSON.parse(localStorage.getItem("credentials")).role
+          }/existingrelease/hotfix/${id}`}
+          className="black-text"
+        >
           {data.releaseSignOffDate}
         </Link>
       </td>
       <td className="center">
-        <Link to={`/dev/existingrelease/hotfix/${id}`} className="black-text">
+        <Link
+          to={`/${
+            JSON.parse(localStorage.getItem("credentials")).role
+          }/existingrelease/hotfix/${id}`}
+          className="black-text"
+        >
           {data.releaseDate}
         </Link>
       </td>

@@ -31,7 +31,7 @@ const Daily = (props) => {
           clickHandler(event);
         }}
         defaultValue="Select release type"
-        maxMenuHeight={150}
+        maxMenuHeight={170}
       />
       {option === "2" ? (
         <div className="row">

@@ -14,7 +14,7 @@ const Release = (props) => {
     { label: "Frontend Release", value: "3" },
     { label: "Hotfix Relese", value: "4" },
   ];
-  const [option, setOption] = useState("2");
+  const [option, setOption] = useState("1");
   const clickHandler = (event) => {
     if (event !== null) {
       setOption(event.value);
@@ -33,7 +33,7 @@ const Release = (props) => {
         defaultValue="Select release type"
         maxMenuHeight={170}
       />
-      {option === "2" ? (
+      {option === "1" ? (
         <div className="row">
           <div className="padding-top-20px">
             <table className="highlight striped white">
@@ -88,11 +88,11 @@ const Release = (props) => {
             </table>
           </div>
         </div>
-      ) : option === "1" ? (
+      ) : option === "2" ? (
         props.history.push(
           `/${
             JSON.parse(localStorage.getItem("credentials")).role
-          }/existingrelease/all`
+          }/existingrelease/daily`
         )
       ) : option === "3" ? (
         props.history.push(

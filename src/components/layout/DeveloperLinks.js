@@ -140,14 +140,22 @@ const DeveloperLinks = () => {
   return (
     <ul className="right hide-on-med-and-down">
       <li className="light-green-text text-darken-1">
-        <NavLink to="/dev/newrelease">
+        <NavLink
+          to={`/${
+            JSON.parse(localStorage.getItem("credentials")).role
+          }/newrelease`}
+        >
           <button className="btn btn-flat white light-green-text text-darken-2 pulse">
             New Release
           </button>
         </NavLink>
       </li>
       <li>
-        <NavLink to="/dev/existingrelease/all">
+        <NavLink
+          to={`/${
+            JSON.parse(localStorage.getItem("credentials")).role
+          }/existingrelease/all`}
+        >
           <button className="btn btn-flat white light-green-text text-darken-2 pulse">
             View Existing Release
           </button>
