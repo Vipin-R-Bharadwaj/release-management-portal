@@ -7,6 +7,8 @@ import useFetch from "../../../useFetch";
 const Release = (props) => {
   const userid = JSON.parse(localStorage.getItem("credentials")).eid;
   const data = useFetch(`http://localhost:8000/${userid}`);
+  data && localStorage.setItem("Existing Release", JSON.stringify(data));
+
   // const parsedData = Object.keys(data).map((key) => [key, data[key]]);
   const optionList = [
     { label: "All", value: "1" },

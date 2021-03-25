@@ -17,6 +17,7 @@ import Hotfix from "./components/release/existingrelease/hotfix/Hotfix";
 
 import AdminDashboard from "./components/user/admin/AdminDashboard";
 import DevopsDashboard from "./components/user/dev_ops/DevopsDashboard";
+import AdminAdd from "./components/user/admin/AdminAdd";
 
 // Developer
 
@@ -56,6 +57,12 @@ function App() {
           <Route exact path="/admin/home">
             <AdminDashboard />
           </Route>
+          <Route exact path="/admin/add/:id">
+            <AdminAdd />
+          </Route>
+          {/* <Route exact path="/admin/edit/:id">
+            <AdminEd />
+          </Route> */}
 
           {/* Devops Section */}
           <Route exact path="/devops/home">

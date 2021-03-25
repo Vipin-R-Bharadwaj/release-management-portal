@@ -16,8 +16,48 @@ const DailyForm = (props) => {
     }
     return tmp;
   };
-  const sqlApprovalOptions = getDropdown(
-    JSON.parse(localStorage.getItem("sqlApprovalArray"))
+
+  const podList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).pod
+  );
+
+  const releaseStatusList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).release_status
+  );
+
+  const releaseTypeList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).release_type
+  );
+
+  const impactList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).impact
+  );
+
+  const impactAreasList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).impact_areas
+  );
+
+  const requiresBarList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).generic
+  );
+
+  const sqlApprovalList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).sql_queries_approval
+  );
+
+  const heavySQLAlterList = [
+    {
+      label: "Yes",
+      value: "Yes",
+    },
+    {
+      label: "No",
+      value: "No",
+    },
+  ];
+
+  const torList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).type_of_release
   );
 
   const [item, setItem] = useState(null);
@@ -106,22 +146,22 @@ const DailyForm = (props) => {
                   <CreatableSelect
                     placeholder="POD"
                     // isClearable
-                    options={sqlApprovalOptions}
+                    options={podList}
                     onChange={(event) => {
                       setPod(event.value);
                     }}
-                    maxMenuHeight={sqlApprovalOptions.length * 42.5}
+                    maxMenuHeight={8 * 42.5}
                   />
                 </div>
                 <div className="col s12 m3">
                   <CreatableSelect
                     placeholder="Release Type"
                     // isClearable
-                    options={sqlApprovalOptions}
+                    options={releaseTypeList}
                     onChange={(event) => {
                       setReleaseType(event.value);
                     }}
-                    maxMenuHeight={sqlApprovalOptions.length * 42.5}
+                    maxMenuHeight={releaseTypeList.length * 42.5}
                   />
                 </div>
               </div>
@@ -141,33 +181,33 @@ const DailyForm = (props) => {
                   <CreatableSelect
                     placeholder="Impact"
                     // isClearable
-                    options={sqlApprovalOptions}
+                    options={impactList}
                     onChange={(event) => {
                       setImpact(event.value);
                     }}
-                    maxMenuHeight={sqlApprovalOptions.length * 42.5}
+                    maxMenuHeight={impactList.length * 42.5}
                   />
                 </div>
                 <div className="col s12 m4">
                   <CreatableSelect
                     placeholder="Impact Areas"
                     // isClearable
-                    options={sqlApprovalOptions}
+                    options={impactAreasList}
                     onChange={(event) => {
                       setImpactAreas(event.value);
                     }}
-                    maxMenuHeight={sqlApprovalOptions.length * 42.5}
+                    maxMenuHeight={8 * 42.5}
                   />
                 </div>
                 <div className="col s12 m4">
                   <CreatableSelect
                     placeholder="Release Status"
                     // isClearable
-                    options={sqlApprovalOptions}
+                    options={releaseStatusList}
                     onChange={(event) => {
                       setReleaseStatus(event.value);
                     }}
-                    maxMenuHeight={sqlApprovalOptions.length * 42.5}
+                    maxMenuHeight={releaseStatusList.length * 42.5}
                   />
                 </div>
               </div>
@@ -183,13 +223,13 @@ const DailyForm = (props) => {
                 />
                 <div className="col s12 m6">
                   <CreatableSelect
-                    placeholder="Release Type"
+                    placeholder="Type of Release"
                     // isClearable
-                    options={sqlApprovalOptions}
+                    options={torList}
                     onChange={(event) => {
-                      setReleaseType(event.value);
+                      setTor(event.value);
                     }}
-                    maxMenuHeight={sqlApprovalOptions.length * 42.5}
+                    maxMenuHeight={8 * 42.5}
                   />
                 </div>
               </div>
@@ -217,103 +257,101 @@ const DailyForm = (props) => {
                   changeHandler={setTechPRSignoffDate}
                   disabled={true}
                 />
-                <div className="row">
-                  <div className="col s12 m5">
-                    <CreatableSelect
-                      placeholder="SQL Approval"
-                      // isClearable
-                      options={sqlApprovalOptions}
-                      onChange={(event) => {
-                        setSqlApproval(event.value);
-                      }}
-                      maxMenuHeight={sqlApprovalOptions.length * 42.5}
-                    />
-                  </div>
-                  <div className="col s12 m4">
-                    <CreatableSelect
-                      placeholder="Heavy SQL Alter"
-                      // isClearable
-                      options={sqlApprovalOptions}
-                      onChange={(event) => {
-                        setHeavySQLAlter(event.value);
-                      }}
-                      maxMenuHeight={sqlApprovalOptions.length * 42.5}
-                    />
-                  </div>
-                </div>
-
-                <div className="row">
-                  <Input
-                    key="qaPOC"
-                    btnID="qaPOC"
-                    btnType="text"
-                    btnClass=""
-                    btnText="QA POC"
-                    btnWidth="m6"
-                    changeHandler={setQaPOC}
-                  />
-                  {[
-                    ["stageQASignoffDate", false, 6, setStageQASignoffDate],
-                    [
-                      "integrationQASignoffDate",
-                      false,
-                      7,
-                      setIntegrationQASignoffDate,
-                    ],
-                  ].map((element) => (
-                    <DatePickerHOC
-                      id={element[0]}
-                      changeHandler={element[3]}
-                      key={element[2]}
-                      disabled={element[1]}
-                    />
-                  ))}
-                </div>
-                <div className="row">
-                  <div className="col s12 m4">
-                    <CreatableSelect
-                      placeholder="Requires BAR"
-                      // isClearable
-                      options={sqlApprovalOptions}
-                      onChange={(event) => {
-                        setRequiresBAR(event.value);
-                      }}
-                      maxMenuHeight={sqlApprovalOptions.length * 42.5}
-                    />
-                  </div>
-                  <Input
-                    key="rollOut"
-                    btnID="rollOut"
-                    btnType="text"
-                    btnClass=""
-                    btnText="RollOut"
-                    btnWidth="m5"
-                    changeHandler={setRollOut}
-                  />
-                  <DatePickerHOC
-                    id="barDate"
-                    changeHandler={setBarDate}
-                    key="8"
+                <div className="col s12 m5">
+                  <CreatableSelect
+                    placeholder="SQL Approval"
+                    // isClearable
+                    options={sqlApprovalList}
+                    onChange={(event) => {
+                      setSqlApproval(event.value);
+                    }}
+                    maxMenuHeight={5 * 42.5}
                   />
                 </div>
-                <div className="row">
-                  <Button
-                    btnName="Back"
-                    iconName="arrow_back"
-                    iconAlign="left"
-                    btnColor="red darken-1"
-                    clickHandler={backHandler}
-                  />
-                  <Button
-                    btnName="Submit"
-                    iconName="send"
-                    iconAlign="right"
-                    btnColor="light-green darken-2"
-                    clickHandler={submitHandler}
+                <div className="col s12 m4">
+                  <CreatableSelect
+                    placeholder="Heavy SQL Alter"
+                    // isClearable
+                    options={heavySQLAlterList}
+                    onChange={(event) => {
+                      setHeavySQLAlter(event.value);
+                    }}
+                    maxMenuHeight={heavySQLAlterList.length * 42.5}
                   />
                 </div>
-                <div className="padding-top-10px"></div>
               </div>
+
+              <div className="row">
+                <Input
+                  key="qaPOC"
+                  btnID="qaPOC"
+                  btnType="text"
+                  btnClass=""
+                  btnText="QA POC"
+                  btnWidth="m6"
+                  changeHandler={setQaPOC}
+                />
+                {[
+                  ["stageQASignoffDate", false, 6, setStageQASignoffDate],
+                  [
+                    "integrationQASignoffDate",
+                    false,
+                    7,
+                    setIntegrationQASignoffDate,
+                  ],
+                ].map((element) => (
+                  <DatePickerHOC
+                    id={element[0]}
+                    changeHandler={element[3]}
+                    key={element[2]}
+                    disabled={element[1]}
+                  />
+                ))}
+              </div>
+              <div className="row">
+                <Input
+                  key="rollOut"
+                  btnID="rollOut"
+                  btnType="text"
+                  btnClass=""
+                  btnText="RollOut"
+                  btnWidth="m4"
+                  changeHandler={setRollOut}
+                />
+                <div className="col s12 m4">
+                  <CreatableSelect
+                    placeholder="Requires BAR"
+                    // isClearable
+                    options={requiresBarList}
+                    onChange={(event) => {
+                      setRequiresBAR(event.value);
+                    }}
+                    maxMenuHeight={3 * 42.5}
+                  />
+                </div>
+                <DatePickerHOC
+                  id="barDate"
+                  changeHandler={setBarDate}
+                  key="8"
+                />
+              </div>
+              <div className="row">
+                <Button
+                  btnName="Back"
+                  iconName="arrow_back"
+                  iconAlign="left"
+                  btnColor="red darken-1"
+                  clickHandler={backHandler}
+                />
+                <Button
+                  btnName="Submit"
+                  iconName="send"
+                  iconAlign="right"
+                  btnColor="light-green darken-2"
+                  clickHandler={submitHandler}
+                />
+              </div>
+              <div className="padding-top-10px"></div>
             </form>
           </div>
         </div>

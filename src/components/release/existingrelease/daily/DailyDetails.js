@@ -3,11 +3,67 @@ import { useState } from "react";
 import Input from "./form/Input";
 import Button from "./form/Button";
 import DatePickerHOC from "./form/DatePickerHOC";
+import CreatableSelect from "react-select/creatable";
+
 import { withRouter } from "react-router";
 
 const DailyDetails = (props) => {
   // const [data, setData] = useState(DailyData);
-  const data = props.DailyData && props.DailyData;
+  const data = JSON.parse(localStorage.getItem("Existing Release")).daily;
+  console.log(data);
+
+  const getDropdown = (arr) => {
+    var tmp = [];
+    for (var i = 0; i < arr.length; ++i) {
+      if (arr[i] !== undefined) {
+        tmp.push({ label: arr[i], value: arr[i] });
+      }
+    }
+    return tmp;
+  };
+
+  const podList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).pod
+  );
+
+  const releaseStatusList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).release_status
+  );
+
+  const releaseTypeList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).release_type
+  );
+
+  const impactList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).impact
+  );
+
+  const impactAreasList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).impact_areas
+  );
+
+  const requiresBarList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).generic
+  );
+
+  const sqlApprovalList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).sql_queries_approval
+  );
+
+  const heavySQLAlterList = [
+    {
+      label: "Yes",
+      value: "Yes",
+    },
+    {
+      label: "No",
+      value: "No",
+    },
+  ];
+
+  const torList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).type_of_release
+  );
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -44,313 +100,290 @@ const DailyDetails = (props) => {
     );
   };
 
-  const [item, setItem] = useState(null);
-  const [pod, setPOD] = useState(null);
-  const [releaseType, setReleaseType] = useState(null);
-  const [description, setDescription] = useState(null);
-  const [impact, setImpact] = useState(null);
-  const [impactAreas, setImpactAreas] = useState(null);
-  const [releaseStatus, setReleaseStatus] = useState(null);
-  const [developerPOC, setDeveloperPOC] = useState(null);
-  const [tor, setTOR] = useState(null);
-  const [prLink, setPrLink] = useState(null);
-  const [releaseDate, setReleaseDate] = useState(null);
-  const [techPRSignoffDate, setTechPRSignoffDate] = useState(null);
-  const [sqlApproval, setSqlApproval] = useState(null);
-  const [heavySQLAlter, setHeavySQLAlter] = useState(null);
-  const [qaPOC, setQaPOC] = useState(null);
-  const [stageQASignoffDate, setStageQASignoffDate] = useState(null);
-  const [integrationQASignoffDate, setIntegrationQASignoffDate] = useState(
-    null
+  const [item, setItem] = useState(data[0].item);
+  const [pod, setPod] = useState(data[0].pod);
+  const [releaseType, setReleaseType] = useState(data[0].releaseType);
+  const [description, setDescription] = useState(data[0].description);
+  const [impact, setImpact] = useState(data[0].impact);
+  const [impactAreas, setImpactAreas] = useState(data[0].impactAreas);
+  const [releaseStatus, setReleaseStatus] = useState(data[0].releaseStatus);
+  const [developerPOC, setDeveloperPOC] = useState(data[0].developerPOC);
+  const [tor, setTor] = useState(data[0].tor);
+  const [prLink, setPrLink] = useState(data[0].prLink);
+  const [releaseDate, setReleaseDate] = useState(data[0].releaseDate);
+  const [techPRSignoffDate, setTechPRSignoffDate] = useState(
+    data[0].techPRSignoffDate
   );
-  const [rollOut, setRollOut] = useState(null);
-  const [requiresBAR, setRequiresBAR] = useState(null);
-  const [barDate, setBarDate] = useState(null);
-
-  const inputOptions1 = [
-    {
-      btnID: "item",
-      btnType: "text",
-      btnClass: "validate",
-      btnText: "Item",
-      btnWidth: "m6",
-      btnValue: data && data[0].item,
-      changeHandler: { setItem },
-    },
-    {
-      btnID: "pod",
-      btnType: "text",
-      btnClass: "",
-      btnText: "POD",
-      btnWidth: "m3",
-      btnValue: data && data[0].pod,
-      changeHandler: { setPOD },
-    },
-    {
-      btnID: "releaseType",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Release Type",
-      btnWidth: "m3",
-      btnValue: data && data[0].releaseType,
-      changeHandler: { setReleaseType },
-    },
-  ];
-  const inputOptions2 = [
-    {
-      btnID: "description",
-      btnType: "text",
-      btnClass: "materialize-textarea",
-      btnText: "Description",
-      btnWidth: "m12",
-      btnValue: data && data[0].description,
-      changeHandler: { setDescription },
-    },
-  ];
-  const inputOptions3 = [
-    {
-      btnID: "impact",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Impact",
-      btnWidth: "m4",
-      btnValue: data && data[0].impact,
-      changeHandler: { setImpact },
-    },
-    {
-      btnID: "impactAreas",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Impact Areas",
-      btnWidth: "m4",
-      btnValue: data && data[0].impactAreas,
-      changeHandler: { setImpactAreas },
-    },
-    {
-      btnID: "releaseStatus",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Release Status",
-      btnWidth: "m4",
-      btnValue: data && data[0].releaseStatus,
-      changeHandler: { setReleaseStatus },
-    },
-  ];
-  const inputOptions4 = [
-    {
-      btnID: "developerPOC",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Developer Point of Contact",
-      btnWidth: "m6",
-      btnValue: data && data[0].developerPOC,
-      changeHandler: { setDeveloperPOC },
-    },
-    {
-      btnID: "tor",
-      btnType: "text",
-      btnClass: "",
-      btnText: "TOR",
-      btnWidth: "m6",
-      btnValue: data && data[0].tor,
-      changeHandler: { setTOR },
-    },
-  ];
-  const inputOptions5 = [
-    {
-      btnID: "prLink",
-      btnType: "text",
-      btnClass: "materialize-textarea",
-      btnText: "PR Link",
-      btnWidth: "m9",
-      btnValue: data && data[0].prLink,
-      changeHandler: { setPrLink },
-    },
-  ];
-  const inputOptions6 = [
-    {
-      btnID: "sqlApproval",
-      btnType: "text",
-      btnClass: "text",
-      btnText: "SQL Approval",
-      btnWidth: "m3",
-      btnValue: data && data[0].sqlApproval,
-      changeHandler: { setSqlApproval },
-    },
-    {
-      btnID: "heavySQLAlter",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Heavy SQL Alter",
-      btnWidth: "m3",
-      btnValue: data && data[0].heavySQLAlter,
-      changeHandler: { setHeavySQLAlter },
-    },
-    {
-      btnID: "qaPOC",
-      btnType: "text",
-      btnClass: "",
-      btnText: "QA POC",
-      btnWidth: "m3",
-      btnValue: data && data[0].qaPOC,
-      changeHandler: { setQaPOC },
-    },
-  ];
-  const inputOptions7 = [
-    {
-      btnID: "rollOut",
-      btnType: "text",
-      btnClass: "text",
-      btnText: "Rollout",
-      btnWidth: "m2",
-      btnValue: data && data[0].rollOut,
-      changeHandler: { setRollOut },
-    },
-    {
-      btnID: "requiresBAR",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Requires BAR",
-      btnWidth: "m2",
-      btnValue: data && data[0].requiresBAR,
-      changeHandler: { setRequiresBAR },
-    },
-    {
-      btnID: "barDate",
-      btnType: "text",
-      btnClass: "",
-      btnText: "BAR Date",
-      btnWidth: "m2",
-      btnValue: data && data[0].barDate,
-      changeHandler: { setBarDate },
-    },
-  ];
+  const [sqlApproval, setSqlApproval] = useState(data[0].sqlApproval);
+  const [heavySQLAlter, setHeavySQLAlter] = useState(data[0].heavySQLAlter);
+  const [qaPOC, setQaPOC] = useState(data[0].qaPOC);
+  const [stageQASignoffDate, setStageQASignoffDate] = useState(
+    data[0].stageQASignoffDate
+  );
+  const [integrationQASignoffDate, setIntegrationQASignoffDate] = useState(
+    data[0].integrationQASignoffDate
+  );
+  const [rollOut, setRollOut] = useState(data[0].rollOut);
+  const [requiresBAR, setRequiresBAR] = useState(data[0].requiresBAR);
+  const [barDate, setBarDate] = useState(data[0].barDate);
 
   return (
-    <div className="card z-depth-2 formStyle1">
-      <div className="padding-top-20px">
-        <form onSubmit={(event) => submitHandler(event)}>
-          {[
-            [inputOptions1, 0],
-            [inputOptions2, 1],
-            [inputOptions3, 2],
-            [inputOptions4, 3],
-          ].map((option) => (
-            <div className="row" key={option[1]}>
-              {option[0].map((element) => (
+    <div>
+      <div className="padding-top-40px"></div>
+      <div className="center">
+        <div className="card z-depth-2 formStyle1">
+          <h2 className="red-text text-darken-1">Daily Release</h2>
+          <div className="padding-top-20px"></div>
+          <div className="divider"></div>
+          <div className="padding-top-20px">
+            <form onSubmit={(event) => submitHandler(event)}>
+              <div className="row">
                 <Input
-                  key={element.btnID}
-                  btnID={element.btnID}
-                  btnType={element.btnType}
-                  btnClass={element.btnClass}
-                  btnText={element.btnText}
-                  btnWidth={element.btnWidth}
-                  btnValue={element.btnValue}
-                  changeHandler={element.changeHandler}
+                  key="item"
+                  btnID="item"
+                  btnType="text"
+                  btnClass="validate"
+                  btnText="Item"
+                  btnWidth="m6"
+                  btnValue={item}
+                  changeHandler={setItem}
                 />
-              ))}
-            </div>
-          ))}
-          <div className="row">
-            <DatePickerHOC
-              key={4}
-              id="releaseDate"
-              name="Release Date"
-              changeHandler={(event) => setReleaseDate(event.target.value)}
-              disabled={true}
-            />
-            {inputOptions5.map((element) => (
-              <Input
-                key={element.btnID}
-                btnID={element.btnID}
-                btnClass={element.btnClass}
-                btnType={element.btnType}
-                btnText={element.btnText}
-                btnWidth={element.btnWidth}
-                btnValue={element.btnValue}
-                changeHandler={element.changeHandler}
-              />
-            ))}
+                <div className="col s12 m3">
+                  <CreatableSelect
+                    id="pod"
+                    placeholder={pod}
+                    // isClearable
+                    options={podList}
+                    onChange={(event) => {
+                      setPod(event.value);
+                    }}
+                    maxMenuHeight={8 * 42.5}
+                  />
+                  <label htmlFor="pod">POD</label>
+                </div>
+                <div className="col s12 m3">
+                  <CreatableSelect
+                    id="releaseType"
+                    placeholder={releaseType}
+                    // isClearable
+                    options={releaseTypeList}
+                    onChange={(event) => {
+                      setReleaseType(event.value);
+                    }}
+                    maxMenuHeight={releaseTypeList.length * 42.5}
+                  />
+                  <label htmlFor="releaseType">Release Type</label>
+                </div>
+              </div>
+              <div className="row">
+                <Input
+                  key="description"
+                  btnID="description"
+                  btnType="text"
+                  btnClass="materialize-textarea"
+                  btnText="Description"
+                  btnWidth="m12"
+                  btnValue={description}
+                  changeHandler={setDescription}
+                />
+              </div>
+              <div className="row">
+                <div className="col s12 m4">
+                  <CreatableSelect
+                    id="impact"
+                    placeholder={impact}
+                    // isClearable
+                    options={impactList}
+                    onChange={(event) => {
+                      setImpact(event.value);
+                    }}
+                    maxMenuHeight={impactList.length * 42.5}
+                  />
+                  <label htmlFor="impact">Impact</label>
+                </div>
+                <div className="col s12 m4">
+                  <CreatableSelect
+                    id="impactAreas"
+                    placeholder={impactAreas}
+                    // isClearable
+                    options={impactAreasList}
+                    onChange={(event) => {
+                      setImpactAreas(event.value);
+                    }}
+                    maxMenuHeight={8 * 42.5}
+                  />
+                  <label htmlFor="impactAreas">Impact Areas</label>
+                </div>
+                <div className="col s12 m4">
+                  <CreatableSelect
+                    id="releaseStatus"
+                    placeholder={releaseStatus}
+                    // isClearable
+                    options={releaseStatusList}
+                    onChange={(event) => {
+                      setReleaseStatus(event.value);
+                    }}
+                    maxMenuHeight={releaseStatusList.length * 42.5}
+                  />
+                  <label htmlFor="releaseStatus">Release Status</label>
+                </div>
+              </div>
+              <div className="row">
+                <Input
+                  key="developerPOC"
+                  btnID="developerPOC"
+                  btnType="text"
+                  btnClass=""
+                  btnText="Developer Point of Contact"
+                  btnWidth="m6"
+                  btnValue={developerPOC}
+                  changeHandler={setDeveloperPOC}
+                />
+                <div className="col s12 m6">
+                  <CreatableSelect
+                    id="tor"
+                    placeholder={tor}
+                    // isClearable
+                    options={torList}
+                    onChange={(event) => {
+                      setTor(event.value);
+                    }}
+                    maxMenuHeight={8 * 42.5}
+                  />
+                  <label htmlFor="tor">Type of Release</label>
+                </div>
+              </div>
+              <div className="row">
+                <DatePickerHOC
+                  key={4}
+                  id="releaseDate"
+                  changeHandler={setReleaseDate}
+                  // disabled={true}
+                />
+                <Input
+                  key="prLink"
+                  btnID="prLink"
+                  btnClass="materialize-textarea"
+                  btnType="text"
+                  btnText="PR Link"
+                  btnWidth="m9"
+                  btnValue={prLink}
+                  changeHandler={setPrLink}
+                />
+              </div>
+              <div className="row">
+                <DatePickerHOC
+                  key={5}
+                  id="techPRSignoffDate"
+                  changeHandler={setTechPRSignoffDate}
+                  disabled={true}
+                />
+                <div className="col s12 m5">
+                  <CreatableSelect
+                    id="SQL Approval"
+                    placeholder={sqlApproval}
+                    // isClearable
+                    options={sqlApprovalList}
+                    onChange={(event) => {
+                      setSqlApproval(event.value);
+                    }}
+                    maxMenuHeight={5 * 42.5}
+                  />
+                  <label htmlFor="sqlApproval">SQL Approval</label>
+                </div>
+                <div className="col s12 m4">
+                  <CreatableSelect
+                    id="heavySQLAlter"
+                    placeholder={heavySQLAlter}
+                    // isClearable
+                    options={heavySQLAlterList}
+                    onChange={(event) => {
+                      setHeavySQLAlter(event.value);
+                    }}
+                    maxMenuHeight={heavySQLAlterList.length * 42.5}
+                  />
+                  <label htmlFor="heavySQLAlter">Heavy SQL Alter</label>
+                </div>
+              </div>
+
+              <div className="row">
+                <Input
+                  key="qaPOC"
+                  btnID="qaPOC"
+                  btnType="text"
+                  btnClass=""
+                  btnText="QA POC"
+                  btnWidth="m6"
+                  btnValue={qaPOC}
+                  changeHandler={setQaPOC}
+                />
+                {[
+                  ["stageQASignoffDate", false, 6, setStageQASignoffDate],
+                  [
+                    "integrationQASignoffDate",
+                    false,
+                    7,
+                    setIntegrationQASignoffDate,
+                  ],
+                ].map((element) => (
+                  <DatePickerHOC
+                    id={element[0]}
+                    changeHandler={element[3]}
+                    key={element[2]}
+                    disabled={element[1]}
+                  />
+                ))}
+              </div>
+              <div className="row">
+                <Input
+                  key="rollOut"
+                  btnID="rollOut"
+                  btnType="text"
+                  btnClass=""
+                  btnText="RollOut"
+                  btnWidth="m4"
+                  btnValue={rollOut}
+                  changeHandler={setRollOut}
+                />
+                <div className="col s12 m4">
+                  <CreatableSelect
+                    id="requiresBar"
+                    placeholder={requiresBAR}
+                    // isClearable
+                    options={requiresBarList}
+                    onChange={(event) => {
+                      setRequiresBAR(event.value);
+                    }}
+                    maxMenuHeight={3 * 42.5}
+                  />
+                  <label htmlFor="requiresBar">Requires BAR</label>
+                </div>
+                <DatePickerHOC
+                  id="barDate"
+                  changeHandler={setBarDate}
+                  key="8"
+                />
+              </div>
+              <div className="row">
+                <Button
+                  btnName="Back"
+                  iconName="arrow_back"
+                  iconAlign="left"
+                  btnColor="red darken-1"
+                  clickHandler={backHandler}
+                />
+                <Button
+                  btnName="Submit"
+                  iconName="send"
+                  iconAlign="right"
+                  btnColor="light-green darken-2"
+                  clickHandler={submitHandler}
+                />
+              </div>
+              <div className="padding-top-10px"></div>
+            </form>
           </div>
-          <div className="row">
-            <DatePickerHOC
-              key={5}
-              id="techPRSignoffDate"
-              name="Tech PR Signoff Date"
-              changeHandler={(event) =>
-                setTechPRSignoffDate(event.target.value)
-              }
-              disabled={true}
-            />
-            {inputOptions6.map((element) => (
-              <Input
-                key={element.btnID}
-                btnID={element.btnID}
-                btnClass={element.btnClass}
-                btnType={element.btnType}
-                btnText={element.btnText}
-                btnWidth={element.btnWidth}
-                btnValue={element.btnValue}
-                changeHandler={element.changeHandler}
-              />
-            ))}
-          </div>
-          <div className="row">
-            {[
-              [
-                "stageQASignoffDate",
-                "Stage QA Signoff Date",
-                false,
-                6,
-                setStageQASignoffDate,
-              ],
-              [
-                "integrationQASignoffDate",
-                "Integration QA Signoff Date",
-                false,
-                7,
-                setIntegrationQASignoffDate,
-              ],
-            ].map((element) => (
-              <DatePickerHOC
-                id={element[0]}
-                name={element[1]}
-                changeHandler={element[4]}
-                key={element[3]}
-                disabled={element[2]}
-              />
-            ))}
-            {inputOptions7.map((element) => (
-              <Input
-                key={element.btnID}
-                btnID={element.btnID}
-                btnClass={element.btnClass}
-                btnType={element.btnType}
-                btnText={element.btnText}
-                btnWidth={element.btnWidth}
-                btnValue={element.btnValue}
-                changeHandler={element.changeHandler}
-              />
-            ))}
-          </div>
-          <div className="row">
-            <Button
-              btnName="Back"
-              iconName="arrow_back"
-              iconAlign="left"
-              btnColor="red darken-1"
-              clickHandler={backHandler}
-            />
-            <Button
-              btnName="Submit"
-              iconName="send"
-              iconAlign="right"
-              btnColor="light-green darken-2"
-              clickHandler={submitHandler}
-            />
-          </div>
-          <div className="padding-top-10px"></div>
-        </form>
+        </div>
       </div>
     </div>
   );

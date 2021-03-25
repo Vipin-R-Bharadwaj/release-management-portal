@@ -1,141 +1,90 @@
-import { Component } from "react";
 import { withRouter } from "react-router";
 // import ValidateURL from "../../../../../validation/ValidateURL";
 import Button from "./Button";
 import DatePicker from "./DatePicker";
 import Input from "./Input";
+import { useState } from "react";
+import CreatableSelect from "react-select/creatable";
 
-class HotfixForm extends Component {
-  state = {
-    item: null,
-    pod: null,
-    releaseType: null,
-    description: null,
-    impact: null,
-    impactAreas: null,
-    releaseStatus: null,
-    developerPOC: null,
-    tor: null,
-    prLink: null,
-    releaseDate: null,
-    releaseWindow: null,
-    approvedBy: null,
-    heavySQLAlter: null,
-    qaBy: null,
-    srd: null,
-    soh: null,
+const HotfixForm = (props) => {
+  // console.log(JSON.parse(localStorage.getItem("HotfixDropdown")).pod);
+
+  const getDropdown = (arr) => {
+    var tmp = [];
+    for (var i = 0; i < arr.length; ++i) {
+      if (arr[i] !== undefined) {
+        tmp.push({ label: arr[i], value: arr[i] });
+      }
+    }
+    return tmp;
   };
 
-  inputOptions1 = [
+  const podList = getDropdown(
+    JSON.parse(localStorage.getItem("HotfixDropdown")).pod
+  );
+
+  const releaseTypeList = getDropdown(
+    JSON.parse(localStorage.getItem("DailyDropdown")).release_type
+  );
+
+  const impactList = getDropdown(
+    JSON.parse(localStorage.getItem("HotfixDropdown")).impact
+  );
+
+  const impactAreasList = getDropdown(
+    JSON.parse(localStorage.getItem("HotfixDropdown")).impact_areas
+  );
+
+  const releaseStatusList = getDropdown(
+    JSON.parse(localStorage.getItem("HotfixDropdown")).release_status
+  );
+
+  const torList = getDropdown(
+    JSON.parse(localStorage.getItem("HotfixDropdown")).type_of_release
+  );
+
+  const approvedByList = getDropdown(
+    JSON.parse(localStorage.getItem("HotfixDropdown")).appoved_by
+  );
+
+  const heavySQLAlterList = [
     {
-      btnID: "item",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Item",
-      btnWidth: "m6",
+      label: "Yes",
+      value: "Yes",
     },
     {
-      btnID: "pod",
-      btnType: "text",
-      btnClass: "",
-      btnText: "POD",
-      btnWidth: "m3",
-    },
-    {
-      btnID: "releaseType",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Release Type",
-      btnWidth: "m3",
-    },
-  ];
-  inputOptions2 = [
-    {
-      btnID: "description",
-      btnType: "text",
-      btnClass: "materialize-textarea",
-      btnText: "Description",
-      btnWidth: "m12",
-    },
-  ];
-  inputOptions3 = [
-    {
-      btnID: "impact",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Impact",
-      btnWidth: "m4",
-    },
-    {
-      btnID: "impactAreas",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Impact Areas",
-      btnWidth: "m4",
-    },
-    {
-      btnID: "releaseStatus",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Release Status",
-      btnWidth: "m4",
+      label: "No",
+      value: "No",
     },
   ];
-  inputOptions4 = [
-    {
-      btnID: "developerPOC",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Developer Point of Contact",
-      btnWidth: "m6",
-    },
-    {
-      btnID: "tor",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Type of Release",
-      btnWidth: "m6",
-    },
-  ];
-  inputOptions5 = [
-    {
-      btnID: "prLink",
-      btnType: "text",
-      btnClass: "",
-      btnText: "PR Link",
-      btnWidth: "m9",
-    },
-  ];
-  inputOptions6 = [
-    {
-      btnID: "releaseWindow",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Release Window",
-      btnWidth: "m4",
-    },
-    {
-      btnID: "approvedBy",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Approved By",
-      btnWidth: "m4",
-    },
-    {
-      btnID: "heavySQLAlter",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Heavy SQL Alter",
-      btnWidth: "m4",
-    },
-  ];
-  inputOptions7 = [
+
+  const [item, setItem] = useState(null);
+  const [pod, setPod] = useState(null);
+  const [releaseType, setReleaseType] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [impact, setImpact] = useState(null);
+  const [impactAreas, setImpactAreas] = useState(null);
+  const [releaseStatus, setReleaseStatus] = useState(null);
+  const [developerPOC, setDeveloperPOC] = useState(null);
+  const [tor, setTor] = useState(null);
+  const [prLink, setPrLink] = useState(null);
+  const [releaseDate, setReleaseDate] = useState(null);
+  const [releaseWindow, setReleaseWindow] = useState(null);
+
+  const [approvedBy, setApprovedBy] = useState(null);
+  const [heavySQLAlter, setHeavySQLAlter] = useState(null);
+  const [qaBy, setQaBy] = useState(null);
+  const [srd, setSrd] = useState(null);
+  const [soh, setSoh] = useState(null);
+
+  const inputOptions7 = [
     {
       btnID: "qaBy",
       btnType: "text",
       btnClass: "",
       btnText: "QA By",
       btnWidth: "m4",
+      changeHandler: { setQaBy },
     },
     {
       btnID: "srd",
@@ -143,6 +92,7 @@ class HotfixForm extends Component {
       btnClass: "",
       btnText: "Source Release Date",
       btnWidth: "m4",
+      changeHandler: { setSrd },
     },
     {
       btnID: "soh",
@@ -150,76 +100,193 @@ class HotfixForm extends Component {
       btnClass: "",
       btnText: "Source of Hotfix",
       btnWidth: "m4",
+      changeHandler: { setSoh },
     },
   ];
 
-  dateOptions = [
-    { id: "releaseDate", disabled: false },
-    { id: "releaseDate", disabled: false },
-  ];
-
-  changeHandler = (event) => {
-    this.setState({
-      [event.target.id]: event.target.value,
-    });
-  };
-  submitHandler = (event) => {
+  const submitHandler = (event) => {
     event.preventDefault();
     console.log("Form Submitted!");
-    this.props.history.push(
+    props.history.push(
       `/${JSON.parse(localStorage.getItem("credentials")).role}/newrelease`
     );
-    // ValidateURL(this.state.prLink)
-    //   ? console.log(this.state)
+    // ValidateURL(state.prLink)
+    //   ? console.log(state)
     //   : alert("Enter Valid PR Link");
   };
-  backHandler = (event) => {
+  const backHandler = (event) => {
     event.preventDefault();
-    this.props.history.push(
+    props.history.push(
       `/${JSON.parse(localStorage.getItem("credentials")).role}/newrelease`
     );
   };
 
-  render() {
-    return (
-      <div className="container">
-        <div className="padding-top-40px"></div>
-        <div className="container center">
-          <div className="card z-depth-2 formStyle1">
-            <h2 className="red-text text-darken-1">Hotfix Release</h2>
-            <div className="padding-top-20px"></div>
-            <div className="divider"></div>
-            <div className="padding-top-20px">
-              <form onSubmit={(event) => this.submitHandler(event)}>
-                {[
-                  this.inputOptions1,
-                  this.inputOptions2,
-                  this.inputOptions3,
-                  this.inputOptions4,
-                ].map((option) => (
-                  <div className="row">
-                    {option.map((element) => (
-                      <Input
-                        key={element.btnID}
-                        btnID={element.btnID}
-                        btnType={element.btnType}
-                        btnClass={element.btnClass}
-                        btnText={element.btnText}
-                        btnWidth={element.btnWidth}
-                        changeHandler={this.changeHandler}
-                      />
-                    ))}
-                  </div>
-                ))}
+  return (
+    <div className="container">
+      <div className="padding-top-40px"></div>
+      <div className="center">
+        <div className="card z-depth-2 formStyle1">
+          <h2 className="red-text text-darken-1">Hotfix Release</h2>
+          <div className="padding-top-20px"></div>
+          <div className="divider"></div>
+          <div className="padding-top-20px">
+            <form onSubmit={(event) => submitHandler(event)}>
+              <div className="row">
+                <Input
+                  key="item"
+                  btnID="item"
+                  btnType="text"
+                  btnClass="validate"
+                  btnText="Item"
+                  btnWidth="m6"
+                  changeHandler={setItem}
+                />
+                <div className="col s12 m3">
+                  <CreatableSelect
+                    placeholder="POD"
+                    // isClearable
+                    options={podList}
+                    onChange={(event) => {
+                      setPod(event.value);
+                    }}
+                    maxMenuHeight={8 * 42.5}
+                  />
+                </div>
+                <div className="col s12 m3">
+                  <CreatableSelect
+                    placeholder="Release Type"
+                    // isClearable
+                    options={releaseTypeList}
+                    onChange={(event) => {
+                      setReleaseType(event.value);
+                    }}
+                    maxMenuHeight={releaseTypeList.length * 42.5}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <Input
+                  key="description"
+                  btnID="description"
+                  btnType="text"
+                  btnClass="validate"
+                  btnText="Description"
+                  btnWidth="m12"
+                  changeHandler={setItem}
+                />
+              </div>
+              <div className="row">
+                <div className="col s12 m4">
+                  <CreatableSelect
+                    placeholder="Impact"
+                    // isClearable
+                    options={impactList}
+                    onChange={(event) => {
+                      setImpact(event.value);
+                    }}
+                    maxMenuHeight={impactList.length * 42.5}
+                  />
+                </div>
+                <div className="col s12 m4">
+                  <CreatableSelect
+                    placeholder="Impact Areas"
+                    // isClearable
+                    options={impactAreasList}
+                    onChange={(event) => {
+                      setImpactAreas(event.value);
+                    }}
+                    maxMenuHeight={8 * 42.5}
+                  />
+                </div>
+                <div className="col s12 m4">
+                  <CreatableSelect
+                    placeholder="Release Status"
+                    // isClearable
+                    options={releaseStatusList}
+                    onChange={(event) => {
+                      setReleaseStatus(event.value);
+                    }}
+                    maxMenuHeight={releaseStatusList.length * 42.5}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <Input
+                  key="developerPOC"
+                  btnID="developerPOC"
+                  btnType="text"
+                  btnClass=""
+                  btnText="Developer Point of Contact"
+                  btnWidth="m6"
+                  changeHandler={setDeveloperPOC}
+                />
+                <div className="col s12 m6">
+                  <CreatableSelect
+                    placeholder="Type of Release"
+                    // isClearable
+                    options={torList}
+                    onChange={(event) => {
+                      setTor(event.value);
+                    }}
+                    maxMenuHeight={8 * 42.5}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col s12 m3 valign-wrapper">
+                  <DatePicker
+                    id="releaseDate"
+                    changeHandler={(event) => setReleaseDate(event)}
+                    disabled={true}
+                  />
+                </div>
+                <Input
+                  key="prLink"
+                  btnID="prLink"
+                  btnType="text"
+                  btnClass=""
+                  btnText="PR Link"
+                  btnWidth="m9"
+                  changeHandler={setPrLink}
+                />
+              </div>
+              <div className="row">
+                <Input
+                  key="releaseWindow"
+                  btnID="releaseWindow"
+                  btnType="text"
+                  btnClass=""
+                  btnText="Release Window"
+                  btnWidth="m4"
+                  changeHandler={setReleaseWindow}
+                />
+                <div className="col s12 m4">
+                  <CreatableSelect
+                    placeholder="Approved By"
+                    // isClearable
+                    options={approvedByList}
+                    onChange={(event) => {
+                      setApprovedBy(event.value);
+                    }}
+                    maxMenuHeight={approvedByList.length * 42.5}
+                  />
+                </div>
+                <div className="col s12 m4">
+                  <CreatableSelect
+                    placeholder="Heavy SQL Alter"
+                    // isClearable
+                    options={heavySQLAlterList}
+                    onChange={(event) => {
+                      setHeavySQLAlter(event.value);
+                    }}
+                    maxMenuHeight={heavySQLAlterList.length * 42.5}
+                  />
+                </div>
+              </div>
+
+              {[inputOptions7].map((option) => (
                 <div className="row">
-                  <div className="col s12 m3 valign-wrapper">
-                    <DatePicker
-                      id="releaseDate"
-                      changeHandler={(event) => this.changeHandler(event)}
-                      disabled={true}
-                    />
-                  </div>
-                  {this.inputOptions5.map((element) => (
+                  {option.map((element) => (
                     <Input
                       key={element.btnID}
                       btnID={element.btnID}
@@ -227,49 +294,34 @@ class HotfixForm extends Component {
                       btnClass={element.btnClass}
                       btnText={element.btnText}
                       btnWidth={element.btnWidth}
-                      changeHandler={this.changeHandler}
+                      changeHandler={element.changeHandler}
                     />
                   ))}
                 </div>
-                {[this.inputOptions6, this.inputOptions7].map((option) => (
-                  <div className="row">
-                    {option.map((element) => (
-                      <Input
-                        key={element.btnID}
-                        btnID={element.btnID}
-                        btnType={element.btnType}
-                        btnClass={element.btnClass}
-                        btnText={element.btnText}
-                        btnWidth={element.btnWidth}
-                        changeHandler={this.changeHandler}
-                      />
-                    ))}
-                  </div>
-                ))}
-                <div className="row">
-                  <Button
-                    btnName="Back"
-                    iconName="arrow_back"
-                    iconAlign="left"
-                    btnColor="red darken-1"
-                    clickHandler={this.backHandler}
-                  />
-                  <Button
-                    btnName="Submit"
-                    iconName="send"
-                    iconAlign="right"
-                    btnColor="light-green darken-2"
-                    clickHandler={this.submitHandler}
-                  />
-                </div>
-                <div className="padding-top-10px"></div>
-              </form>
-            </div>
+              ))}
+              <div className="row">
+                <Button
+                  btnName="Back"
+                  iconName="arrow_back"
+                  iconAlign="left"
+                  btnColor="red darken-1"
+                  clickHandler={backHandler}
+                />
+                <Button
+                  btnName="Submit"
+                  iconName="send"
+                  iconAlign="right"
+                  btnColor="light-green darken-2"
+                  clickHandler={submitHandler}
+                />
+              </div>
+              <div className="padding-top-10px"></div>
+            </form>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default withRouter(HotfixForm);

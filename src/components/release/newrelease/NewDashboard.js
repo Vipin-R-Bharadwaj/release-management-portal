@@ -1,14 +1,16 @@
 import { Link, NavLink } from "react-router-dom";
 import useFetch from "../../../useFetch";
-// import newRelease from "../../../images/newRelease.gif";
+// import newRelease from "../../../images/contact_header";
 
 const NewDashboard = () => {
-  const sqlApprovalArray = useFetch(
-    "http://localhost:8080/daily/getsqlqueriesapproval"
-  );
-  localStorage.setItem("sqlApprovalArray", JSON.stringify(sqlApprovalArray));
+  const dailyDropdown = useFetch("http://localhost:8080/daily/dropdowns");
+  localStorage.setItem("DailyDropdown", JSON.stringify(dailyDropdown));
+  const frontendDropdown = useFetch("http://localhost:8080/frontend/dropdowns");
+  localStorage.setItem("FrontendDropdown", JSON.stringify(frontendDropdown));
+  const hotfixDropdown = useFetch("http://localhost:8080/hotfix/dropdowns");
+  localStorage.setItem("HotfixDropdown", JSON.stringify(hotfixDropdown));
   return (
-    <div className="center">
+    <div className="center sendBackground">
       <div className="padding-top-40px"></div>
       {/* <div>
         <img src={newRelease} alt="" />
@@ -31,15 +33,20 @@ const NewDashboard = () => {
                   <span>
                     <input
                       disabled
-                      id="item"
+                      id="dailyitem"
                       type="text"
                       className="validate"
                     />
-                    <label htmlFor="item">Item</label>
-                    <input disabled id="pod" type="text" className="validate" />
-                    <label htmlFor="pod">POD</label>
-                    <input disabled id="releaseType" type="text" />
-                    <label htmlFor="releaseType">Release Type</label>
+                    <label htmlFor="dailyitem">Item</label>
+                    <input
+                      disabled
+                      id="dailypod"
+                      type="text"
+                      className="validate"
+                    />
+                    <label htmlFor="dailypod">POD</label>
+                    <input disabled id="dailyreleaseType" type="text" />
+                    <label htmlFor="dailyreleaseType">Release Type</label>
                   </span>
                   <div className="padding-top-10px"></div>
                 </div>
@@ -47,7 +54,6 @@ const NewDashboard = () => {
             </NavLink>
           </div>
         </div>
-
         <div className="col s12 m4">
           <div className="frontendCardPadding">
             <Link

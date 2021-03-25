@@ -1,15 +1,10 @@
 import DatePicker from "./DatePicker";
 
-const DatePickerHOC = ({ id, disabled, changeHandler, name, width }) => {
-  const fieldWidth = "col s12 " + width;
+const DatePickerHOC = ({ id, disabled, label, changeHandler }) => {
   return (
-    <div className={fieldWidth}>
-      <DatePicker
-        id={id}
-        name={name}
-        disabled={disabled}
-        changeHandler={changeHandler}
-      />
+    <div className="col s12 m3">
+      <DatePicker id={id} changeHandler={changeHandler} disabled={disabled} />
+      <label htmlFor={id}>{label}</label>
     </div>
   );
 };

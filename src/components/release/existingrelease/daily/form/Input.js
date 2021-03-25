@@ -14,9 +14,12 @@ const Input = ({
         id={btnID}
         type={btnType}
         className={btnClass}
+        value={btnValue}
         onChange={(event) => changeHandler(event)}
       />
-      <label htmlFor={btnID}>{btnText}</label>
+      <label className="active" htmlFor={btnID}>
+        {btnText}
+      </label>
     </div>
   );
 };

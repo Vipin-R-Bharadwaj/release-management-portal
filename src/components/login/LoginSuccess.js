@@ -10,6 +10,8 @@ const loginSuccess = (email, password, role, eid, push) => {
   );
   setTimeout(() => {
     localStorage.removeItem("credentials");
+    alert("Session Expired! Login again to continue");
+    push("/");
   }, 600000);
   role === "admin"
     ? push("/admin/home")
@@ -19,3 +21,30 @@ const loginSuccess = (email, password, role, eid, push) => {
 };
 
 export default loginSuccess;
+
+// const loginSuccess = (data, push) => {
+//   localStorage.setItem(
+//     "credentials",
+//     JSON.stringify({
+//       eid: data.id,
+//       email: data.email,
+//       podId: data.podid,
+//       tokenType: data.tokenType,
+//       username: data.username,
+//       accessToken: data.accessToken,
+//       role: data.roles,
+//     })
+//   );
+//   setTimeout(() => {
+//     localStorage.removeItem("credentials");
+//     alert("Session Expired! Login again to continue");
+//     push("/");
+//   }, 6000000);
+//   data.roles === "admin"
+//     ? push("/admin/home")
+//     : data.roles === "devops"
+//     ? push(`/devops/home`)
+//     : push(`/${data.roles}/newrelease`);
+// };
+
+// export default loginSuccess;

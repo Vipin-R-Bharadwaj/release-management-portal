@@ -39,10 +39,17 @@ code {
   border-radius: 10px;
 }
 
+.sendBackground {
+  background-image: url("/src/images/contact_header.png");
+  background-position: center;
+  background-size: cover;
+  height: 80vh;
+}
+
 .imgPadding {
   padding-left: 8%;
   /* padding-right: 3%; */
-  padding-top: 22%;
+  padding-top: 10%;
 }
 
 .loginFormPadding {
@@ -103,6 +110,10 @@ code {
 
 .padding-top-10px {
   padding-top: 10px;
+}
+
+.padding-top-5px {
+  padding-top: 5px;
 }
 
 .backgroundImg {
