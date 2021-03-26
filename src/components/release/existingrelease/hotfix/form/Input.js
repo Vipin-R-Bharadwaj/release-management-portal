@@ -15,7 +15,7 @@ const Input = ({
         id={btnID}
         type={btnType}
         className={btnClass}
-        disabled
+        disabled={disabled}
         value={btnValue}
         onChange={(event) => changeHandler(event)}
       />

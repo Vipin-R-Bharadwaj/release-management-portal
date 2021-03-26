@@ -1,13 +1,12 @@
-const Button = () => {
+const Button = ({ clickHandler, btnColor, btnName, iconName, iconAlign }) => {
   return (
-    <div className="input-field col s12">
+    <div className="input-field col s12 m6">
       <button
-        type="submit"
-        className="btn waves-effect waves-light btn-large btnStyling green darken-4"
-        // onClick={(event) => submitHandler(event)}
+        className={`btn waves-effect waves-light btn-large btnStyling ${btnColor}`}
+        onClick={(event) => clickHandler(event)}
       >
-        Update
-        <i className="material-icons right">send</i>
+        {btnName}
+        <i className={`material-icons ${iconAlign}`}>{iconName}</i>
       </button>
     </div>
   );

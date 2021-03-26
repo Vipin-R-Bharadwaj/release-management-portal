@@ -15,9 +15,13 @@ import Daily from "./components/release/existingrelease/daily/Daily";
 import Frontend from "./components/release/existingrelease/frontend/Frontend";
 import Hotfix from "./components/release/existingrelease/hotfix/Hotfix";
 
+// Admin Section
 import AdminDashboard from "./components/user/admin/AdminDashboard";
-import DevopsDashboard from "./components/user/dev_ops/DevopsDashboard";
 import AdminAdd from "./components/user/admin/AdminAdd";
+
+// Devops Section
+import DevopsDashboard from "./components/user/dev_ops/DevopsDashboard";
+import ReleaseManagerDashboard from "./components/user/release_manager/ReleaseManagerDashboard";
 
 // Developer
 
@@ -60,13 +64,15 @@ function App() {
           <Route exact path="/admin/add/:id">
             <AdminAdd />
           </Route>
-          {/* <Route exact path="/admin/edit/:id">
-            <AdminEd />
-          </Route> */}
 
           {/* Devops Section */}
           <Route exact path="/devops/home">
             <DevopsDashboard />
+          </Route>
+
+          {/* Release Manager Section */}
+          <Route exact path="/releasemanager/home">
+            <ReleaseManagerDashboard />
           </Route>
 
           {/* New Release */}
@@ -99,47 +105,6 @@ function App() {
           <Route exact path="/:role/existingrelease/:releaseType/:id">
             <ReleaseDetails />
           </Route>
-
-          {/* Developer */}
-          {/* New Release page */}
-          {/* <Route exact path="/dev/newrelease">
-            <DevNewRelease />
-          </Route>
-          <Route exact path="/dev/newrelease/hotfix">
-            <DevHotfixForm />
-          </Route>
-          <Route exact path="/dev/newrelease/frontend">
-            <DevFrontendForm />
-          </Route>
-          <Route exact path="/dev/newrelease/daily">
-            <DevDailyForm />
-          </Route> */}
-          {/* Existing Release page  */}
-          {/* <Route exact path="/dev/existingrelease/all">
-            <DevExistingRelease />
-          </Route> */}
-          {/* Release Details */}
-          {/* <Route exact path="/dev/existingrelease/frontend">
-            <DevFrontend />
-          </Route> */}
-          {/* Release Details */}
-          {/* <Route exact path="/dev/existingrelease/daily">
-            <DevDaily />
-          </Route> */}
-          {/* Release Details */}
-          {/* <Route exact path="/dev/existingrelease/hotfix">
-            <DevHotfix />
-          </Route> */}
-          {/* Release Details */}
-          {/* <Route exact path="/dev/existingrelease/daily/:id">
-            <DevDailyDetails />
-          </Route>
-          <Route exact path="/dev/existingrelease/frontend/:id">
-            <DevFrontendDetails />
-          </Route>
-          <Route exact path="/dev/existingrelease/hotfix/:id">
-            <DevHotfixDetails />
-          </Route> */}
         </Switch>
       </div>
     </BrowserRouter>

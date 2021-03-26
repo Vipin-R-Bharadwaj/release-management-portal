@@ -8,15 +8,17 @@ const loginSuccess = (email, password, role, eid, push) => {
       role: role,
     })
   );
-  setTimeout(() => {
-    localStorage.removeItem("credentials");
-    alert("Session Expired! Login again to continue");
-    push("/");
-  }, 600000);
+  // setTimeout(() => {
+  //   localStorage.removeItem("credentials");
+  //   alert("Session Expired! Login again to continue");
+  //   push("/");
+  // }, 600000);
   role === "admin"
     ? push("/admin/home")
     : role === "devops"
     ? push(`/devops/home`)
+    : role === "release_manager"
+    ? push(`/releasemanager/home`)
     : push(`/${role}/newrelease`);
 };
 

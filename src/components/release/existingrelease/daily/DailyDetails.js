@@ -9,7 +9,6 @@ import { withRouter } from "react-router";
 const DailyDetails = (props) => {
   // const [data, setData] = useState(DailyData);
   const data = JSON.parse(localStorage.getItem("Existing Release")).daily;
-  console.log(data);
 
   const getDropdown = (arr) => {
     var tmp = [];
@@ -21,48 +20,52 @@ const DailyDetails = (props) => {
     return tmp;
   };
 
-  const podList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).pod
-  );
-
   const releaseStatusList = getDropdown(
     JSON.parse(localStorage.getItem("DailyDropdown")).release_status
   );
 
-  const releaseTypeList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).release_type
-  );
+  // dev - On_Hold and QA_Ready
+  // manager - Aanager_Approved and Rejected and On_Hold
+  // qa - Rejected, On_Hold, QA_Approved
 
-  const impactList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).impact
-  );
+  // const podList = getDropdown(
+  //   JSON.parse(localStorage.getItem("DailyDropdown")).pod
+  // );
 
-  const impactAreasList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).impact_areas
-  );
+  // const releaseTypeList = getDropdown(
+  //   JSON.parse(localStorage.getItem("DailyDropdown")).release_type
+  // );
 
-  const requiresBarList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).generic
-  );
+  // const impactList = getDropdown(
+  //   JSON.parse(localStorage.getItem("DailyDropdown")).impact
+  // );
 
-  const sqlApprovalList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).sql_queries_approval
-  );
+  // const impactAreasList = getDropdown(
+  //   JSON.parse(localStorage.getItem("DailyDropdown")).impact_areas
+  // );
 
-  const heavySQLAlterList = [
-    {
-      label: "Yes",
-      value: "Yes",
-    },
-    {
-      label: "No",
-      value: "No",
-    },
-  ];
+  // const requiresBarList = getDropdown(
+  //   JSON.parse(localStorage.getItem("DailyDropdown")).generic
+  // );
 
-  const torList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).type_of_release
-  );
+  // const sqlApprovalList = getDropdown(
+  //   JSON.parse(localStorage.getItem("DailyDropdown")).sql_queries_approval
+  // );
+
+  // const heavySQLAlterList = [
+  //   {
+  //     label: "Yes",
+  //     value: "Yes",
+  //   },
+  //   {
+  //     label: "No",
+  //     value: "No",
+  //   },
+  // ];
+
+  // const torList = getDropdown(
+  //   JSON.parse(localStorage.getItem("DailyDropdown")).type_of_release
+  // );
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -159,32 +162,17 @@ const DailyDetails = (props) => {
                   disabled
                   changeHandler={setPod}
                 />
-                <div className="col s12 m3">
-                  <CreatableSelect
-                    id="pod"
-                    placeholder={pod}
-                    // isClearable
-                    options={podList}
-                    onChange={(event) => {
-                      setPod(event.value);
-                    }}
-                    maxMenuHeight={8 * 42.5}
-                  />
-                  <label htmlFor="pod">POD</label>
-                </div>
-                <div className="col s12 m3">
-                  <CreatableSelect
-                    id="releaseType"
-                    placeholder={releaseType}
-                    // isClearable
-                    options={releaseTypeList}
-                    onChange={(event) => {
-                      setReleaseType(event.value);
-                    }}
-                    maxMenuHeight={releaseTypeList.length * 42.5}
-                  />
-                  <label htmlFor="releaseType">Release Type</label>
-                </div>
+                <Input
+                  key={releaseType}
+                  btnID={releaseType}
+                  btnType="text"
+                  btnClass="validate"
+                  btnText="Release Type"
+                  btnWidth="m3"
+                  btnValue={releaseType}
+                  disabled
+                  changeHandler={setReleaseType}
+                />
               </div>
               <div className="row">
                 <Input
@@ -194,37 +182,34 @@ const DailyDetails = (props) => {
                   btnClass="materialize-textarea"
                   btnText="Description"
                   btnWidth="m12"
+                  disabled
                   btnValue={description}
                   changeHandler={setDescription}
                 />
               </div>
               <div className="row">
-                <div className="col s12 m4">
-                  <CreatableSelect
-                    id="impact"
-                    placeholder={impact}
-                    // isClearable
-                    options={impactList}
-                    onChange={(event) => {
-                      setImpact(event.value);
-                    }}
-                    maxMenuHeight={impactList.length * 42.5}
-                  />
-                  <label htmlFor="impact">Impact</label>
-                </div>
-                <div className="col s12 m4">
-                  <CreatableSelect
-                    id="impactAreas"
-                    placeholder={impactAreas}
-                    // isClearable
-                    options={impactAreasList}
-                    onChange={(event) => {
-                      setImpactAreas(event.value);
-                    }}
-                    maxMenuHeight={8 * 42.5}
-                  />
-                  <label htmlFor="impactAreas">Impact Areas</label>
-                </div>
+                <Input
+                  key={impact}
+                  btnID={impact}
+                  btnType="text"
+                  btnClass="validate"
+                  btnText="Impact"
+                  btnWidth="m4"
+                  btnValue={impact}
+                  disabled
+                  changeHandler={setImpact}
+                />
+                <Input
+                  key={impactAreas}
+                  btnID={impactAreas}
+                  btnType="text"
+                  btnClass="validate"
+                  btnText="Impact Areas"
+                  btnWidth="m4"
+                  btnValue={impactAreas}
+                  disabled
+                  changeHandler={setImpactAreas}
+                />
                 <div className="col s12 m4">
                   <CreatableSelect
                     id="releaseStatus"
@@ -247,29 +232,29 @@ const DailyDetails = (props) => {
                   btnClass=""
                   btnText="Developer Point of Contact"
                   btnWidth="m6"
+                  disabled
                   btnValue={developerPOC}
                   changeHandler={setDeveloperPOC}
                 />
-                <div className="col s12 m6">
-                  <CreatableSelect
-                    id="tor"
-                    placeholder={tor}
-                    // isClearable
-                    options={torList}
-                    onChange={(event) => {
-                      setTor(event.value);
-                    }}
-                    maxMenuHeight={8 * 42.5}
-                  />
-                  <label htmlFor="tor">Type of Release</label>
-                </div>
+                <Input
+                  key={tor}
+                  btnID={tor}
+                  btnType="text"
+                  btnClass="validate"
+                  btnText="Type of Release"
+                  btnWidth="m4"
+                  btnValue={tor}
+                  disabled
+                  changeHandler={setImpact}
+                />
               </div>
               <div className="row">
                 <DatePickerHOC
                   key={4}
                   id="releaseDate"
+                  btnlabel="Release Date"
                   changeHandler={setReleaseDate}
-                  // disabled={true}
+                  disabled={true}
                 />
                 <Input
                   key="prLink"
@@ -278,6 +263,7 @@ const DailyDetails = (props) => {
                   btnType="text"
                   btnText="PR Link"
                   btnWidth="m9"
+                  disabled
                   btnValue={prLink}
                   changeHandler={setPrLink}
                 />
@@ -286,35 +272,32 @@ const DailyDetails = (props) => {
                 <DatePickerHOC
                   key={5}
                   id="techPRSignoffDate"
+                  btnlabel="Tech PR Signoff Date"
                   changeHandler={setTechPRSignoffDate}
                   disabled={true}
                 />
-                <div className="col s12 m5">
-                  <CreatableSelect
-                    id="SQL Approval"
-                    placeholder={sqlApproval}
-                    // isClearable
-                    options={sqlApprovalList}
-                    onChange={(event) => {
-                      setSqlApproval(event.value);
-                    }}
-                    maxMenuHeight={5 * 42.5}
-                  />
-                  <label htmlFor="sqlApproval">SQL Approval</label>
-                </div>
-                <div className="col s12 m4">
-                  <CreatableSelect
-                    id="heavySQLAlter"
-                    placeholder={heavySQLAlter}
-                    // isClearable
-                    options={heavySQLAlterList}
-                    onChange={(event) => {
-                      setHeavySQLAlter(event.value);
-                    }}
-                    maxMenuHeight={heavySQLAlterList.length * 42.5}
-                  />
-                  <label htmlFor="heavySQLAlter">Heavy SQL Alter</label>
-                </div>
+                <Input
+                  key={sqlApproval}
+                  btnID={sqlApproval}
+                  btnClass="materialize-textarea"
+                  btnType="text"
+                  btnText="SQL Approval"
+                  btnWidth="m9"
+                  disabled
+                  btnValue={sqlApproval}
+                  changeHandler={setSqlApproval}
+                />
+                <Input
+                  key={heavySQLAlter}
+                  btnID={heavySQLAlter}
+                  btnClass="materialize-textarea"
+                  btnType="text"
+                  btnText="Heavy SQL Alter"
+                  btnWidth="m9"
+                  disabled
+                  btnValue={heavySQLAlter}
+                  changeHandler={setHeavySQLAlter}
+                />
               </div>
 
               <div className="row">
@@ -326,21 +309,30 @@ const DailyDetails = (props) => {
                   btnText="QA POC"
                   btnWidth="m6"
                   btnValue={qaPOC}
+                  disabled
                   changeHandler={setQaPOC}
                 />
                 {[
-                  ["stageQASignoffDate", false, 6, setStageQASignoffDate],
+                  [
+                    "stageQASignoffDate",
+                    true,
+                    6,
+                    setStageQASignoffDate,
+                    "Stage QA Signoff Date",
+                  ],
                   [
                     "integrationQASignoffDate",
-                    false,
+                    true,
                     7,
                     setIntegrationQASignoffDate,
+                    "Integration QA Signoff Date",
                   ],
                 ].map((element) => (
                   <DatePickerHOC
                     id={element[0]}
                     changeHandler={element[3]}
                     key={element[2]}
+                    btnlabel={element[4]}
                     disabled={element[1]}
                   />
                 ))}
@@ -354,23 +346,25 @@ const DailyDetails = (props) => {
                   btnText="RollOut"
                   btnWidth="m4"
                   btnValue={rollOut}
+                  disabled
                   changeHandler={setRollOut}
                 />
-                <div className="col s12 m4">
-                  <CreatableSelect
-                    id="requiresBar"
-                    placeholder={requiresBAR}
-                    // isClearable
-                    options={requiresBarList}
-                    onChange={(event) => {
-                      setRequiresBAR(event.value);
-                    }}
-                    maxMenuHeight={3 * 42.5}
-                  />
-                  <label htmlFor="requiresBar">Requires BAR</label>
-                </div>
+                <Input
+                  key="requiresBar"
+                  btnID="requiresBar"
+                  btnType="text"
+                  btnClass=""
+                  btnText="requiresBar"
+                  btnWidth="m4"
+                  btnValue={requiresBAR}
+                  disabled
+                  changeHandler={setRequiresBAR}
+                />
                 <DatePickerHOC
                   id="barDate"
+                  key={barDate}
+                  btnlabel="Bar Date"
+                  disabled
                   changeHandler={setBarDate}
                   key="8"
                 />
