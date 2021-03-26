@@ -352,5 +352,74 @@
         "release": "Hotfix"
       }
     ]
+  },
+  "0004": {
+    "frontend": [
+      {
+        "id": 1,
+        "featuresSummary": "PWA autologin for new lead with out loan app creation. Page insight score improvement.Reduced Time to Interactive",
+        "platform": "PWA",
+        "releaseType": "Feature",
+        "releaseVersion": "release/R02-03-21",
+        "impact": "Medium",
+        "impactAreas": "Start to Eligible funnel",
+        "developerPOC": "Uttam",
+        "qaPOC": "Aru",
+        "releaseSignOffDate": "March 2",
+        "releaseDate": "March 3",
+        "releasePercentage": "100%",
+        "releaseWindow": "Morning",
+        "release": "Frontend"
+      }
+    ],
+    "daily": [
+      {
+        "id": 1,
+        "item": "settlement info (portal)",
+        "pod": "Collections",
+        "releaseType": "Feature",
+        "description": "Adding new tab in crm portal where we can show the settlement amount details to the agent and agent can negotiate on that amount with the user.",
+        "impact": "High",
+        "impactAreas": "Collections",
+        "releaseStatus": "In-Progress",
+        "developerPOC": "Parkhi",
+        "tor": "App and Portal Server",
+        "prLink": "https://bitbucket.org/whizdm/portal/pull-requests/151",
+        "releaseDate": "March 9",
+        "techPRSignoffDate": "March 5",
+        "sqlApproval": "Gurdev",
+        "heavySQLAlter": "No",
+        "qaPOC": "Mariammal",
+        "stageQASignoffDate": "March 4",
+        "integrationQASignoffDate": "March 8",
+        "rollOut": "100.00",
+        "requiresBAR": "No",
+        "barDate": "NA",
+        "release": "Daily"
+      }
+    ],
+    "hotfix": [
+      {
+        "id": 1,
+        "item": "Changed the name of property from userCatgory to miCategory",
+        "pod": "Growth",
+        "releaseType": "Bugfix",
+        "description": "As userCatgory already has a meaning in our system",
+        "impact": "Low",
+        "impactAreas": "Start to eligible funnel",
+        "releaseStatus": "Done",
+        "developerPOC": "Hargur",
+        "tor": "Atlas",
+        "prLink": "https://bitbucket.org/whizdm/atlas/pull-requests/441/change-for-xiaomi-categorisation",
+        "releaseDate": "March 4",
+        "releaseWindow": "Immediate",
+        "approvedBy": "NA",
+        "heavySQLAlter": "No",
+        "qaBy": null,
+        "srd": null,
+        "soh": null,
+        "release": "Hotfix"
+      }
+    ]
   }
 }

@@ -30,7 +30,9 @@ const HotfixList = ({ id, data }) => {
           }/existingrelease/hotfix/${id}`}
           className="black-text"
         >
-          {data.featuresSummary}
+          {data.featuresSummary === undefined
+            ? data.description
+            : data.featuresSummary}
         </Link>
       </td>
       <td className="center">

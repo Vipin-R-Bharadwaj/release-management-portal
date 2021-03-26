@@ -5,7 +5,14 @@ import CreatableSelect from "react-select/creatable";
 import { withRouter } from "react-router";
 
 const Hotfix = (props) => {
-  const data = useFetch("http://localhost:8000/hotfix");
+  // const data = useFetch(
+  //   `http://localhost:8000/${
+  //     JSON.parse(localStorage.getItem("credentials")).eid
+  //   }`
+  // );
+
+  const data = JSON.parse(localStorage.getItem("Existing Release")).hotfix;
+
   // const parsedData = Object.keys(data).map((key) => [key, data[key]]);
   const optionList = [
     { label: "All", value: "1" },
@@ -48,6 +55,7 @@ const Hotfix = (props) => {
                 </tr>
               </thead>
               <tbody>
+                {console.log(data.hotfix)}
                 {data &&
                   data.map((element) => (
                     <HotfixList

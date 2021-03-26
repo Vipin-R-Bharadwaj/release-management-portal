@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const DailyList = ({ id, data }) => {
+  console.log(data);
   return (
     <tr key={id}>
       <td className="slnoStyle">
@@ -30,7 +31,9 @@ const DailyList = ({ id, data }) => {
           }/existingrelease/daily/${id}`}
           className="black-text"
         >
-          {data.featuresSummary}
+          {data.featuresSummary === undefined
+            ? data.description
+            : data.featuresSummary}
         </Link>
       </td>
       <td className="center">

@@ -56,7 +56,7 @@ const AdminDashboard = (props) => {
     { label: "Devops", value: "4" },
   ];
 
-  const submitAddHandler = (event) => {
+  const submitEditHandler = (event) => {
     event.preventDefault();
     password === confirmPassword ? (
       <>
@@ -75,8 +75,10 @@ const AdminDashboard = (props) => {
     );
   };
 
-  const submitEditHandler = (event) => {
+  const submitAddHandler = (event) => {
     event.preventDefault();
+    const roleArray = [];
+    roleArray.push(role);
     password === confirmPassword ? (
       <>
         {console.log({
@@ -85,7 +87,27 @@ const AdminDashboard = (props) => {
           email: email,
           employeeId: employeeId,
           podId: podId,
+          role: roleArray,
         })}
+        {}
+        {fetch("http://localhost:8081/api/auth/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password,
+            email: email,
+            eid: employeeId,
+            role: roleArray,
+            podid: podId,
+          }),
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => console.log(data))}
         {handleCloseEdit()}
       </>
     ) : (
@@ -193,7 +215,7 @@ const AdminDashboard = (props) => {
           <button
             className="btn waves-effect red waves-light"
             type="submit"
-            onClick={(event) => submitEditHandler(event)}
+            onClick={(event) => submitAddHandler(event)}
           >
             Submit
             <i className="material-icons right">send</i>
@@ -243,7 +265,7 @@ const AdminDashboard = (props) => {
                         <td className="center">
                           <button
                             id={record.eid}
-                            className="btn btn-flat white waves-effect waves-light"
+                            className="btn btn-flat transparent waves-effect waves-light"
                             onClick={(event) => handleOpenEdit(event, record)}
                           >
                             <i
@@ -255,7 +277,7 @@ const AdminDashboard = (props) => {
                           </button>
                         </td>
                         <td className="center">
-                          <button className="btn btn-flat white waves-effect waves-light">
+                          <button className="btn btn-flat transparent waves-effect waves-light">
                             <i
                               id={record.eid}
                               className="material-icons red-text accent-2"
@@ -279,7 +301,7 @@ const AdminDashboard = (props) => {
             </Modal>
           </div>
         </div>
-        <div className="col s12 m2 center">
+        {/* <div className="col s12 m2 center">
           <CreatableSelect
             placeholder="All"
             // isClearable
@@ -290,7 +312,7 @@ const AdminDashboard = (props) => {
             defaultValue={option}
             maxMenuHeight={170}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

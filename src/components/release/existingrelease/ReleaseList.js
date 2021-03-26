@@ -30,7 +30,6 @@ const ReleaseList = ({ typeOfRelease, id, data }) => {
           }/existingrelease/${typeOfRelease}/${id}`}
           className="black-text"
         >
-          {/* {console.log(data.featuresSummary)} */}
           {data.featuresSummary === undefined
             ? data.description
             : data.featuresSummary}

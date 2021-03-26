@@ -5,7 +5,7 @@ import { withRouter } from "react-router";
 import DailyList from "./DailyList";
 
 const Daily = (props) => {
-  const data = useFetch("http://localhost:8000/daily");
+  const data = JSON.parse(localStorage.getItem("Existing Release")).daily;
   // const parsedData = Object.keys(data).map((key) => [key, data[key]]);
   const optionList = [
     { label: "All", value: "1" },
@@ -48,6 +48,7 @@ const Daily = (props) => {
                 </tr>
               </thead>
               <tbody>
+                {console.log(data)}
                 {data &&
                   data.map((element) => (
                     <DailyList

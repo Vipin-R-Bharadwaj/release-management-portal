@@ -4,7 +4,9 @@ const Input = ({
   btnClass,
   changeHandler,
   btnText,
+  btnValue,
   btnWidth,
+  disabled,
 }) => {
   const divClass = "input-field col s12 " + btnWidth;
   return (
@@ -13,9 +15,13 @@ const Input = ({
         id={btnID}
         type={btnType}
         className={btnClass}
+        disabled
+        value={btnValue}
         onChange={(event) => changeHandler(event)}
       />
-      <label htmlFor={btnID}>{btnText}</label>
+      <label className="active" htmlFor={btnID}>
+        {btnText}
+      </label>
     </div>
   );
 };

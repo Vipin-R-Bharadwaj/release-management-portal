@@ -5,7 +5,7 @@ import CreatableSelect from "react-select/creatable";
 import { withRouter } from "react-router";
 
 const Frontend = (props) => {
-  const data = useFetch("http://localhost:8000/frontend");
+  const data = JSON.parse(localStorage.getItem("Existing Release")).frontend;
   // const parsedData = Object.keys(data).map((key) => [key, data[key]]);
   const optionList = [
     { label: "All", value: "1" },

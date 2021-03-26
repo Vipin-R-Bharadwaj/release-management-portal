@@ -1,7 +1,9 @@
+import Release from "../../release/existingrelease/Release";
+
 const DevopsDashboard = () => {
   return (
     <div>
-      <h1>Hello</h1>
+      <Release />
     </div>
   );
 };

@@ -7,8 +7,6 @@ import { useState } from "react";
 import CreatableSelect from "react-select/creatable";
 
 const HotfixForm = (props) => {
-  // console.log(JSON.parse(localStorage.getItem("HotfixDropdown")).pod);
-
   const getDropdown = (arr) => {
     var tmp = [];
     for (var i = 0; i < arr.length; ++i) {

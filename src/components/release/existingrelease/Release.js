@@ -7,6 +7,12 @@ import useFetch from "../../../useFetch";
 const Release = (props) => {
   const userid = JSON.parse(localStorage.getItem("credentials")).eid;
   const data = useFetch(`http://localhost:8000/${userid}`);
+  const dailyDropdown = useFetch("http://localhost:8080/daily/dropdowns");
+  localStorage.setItem("DailyDropdown", JSON.stringify(dailyDropdown));
+  const frontendDropdown = useFetch("http://localhost:8080/frontend/dropdowns");
+  localStorage.setItem("FrontendDropdown", JSON.stringify(frontendDropdown));
+  const hotfixDropdown = useFetch("http://localhost:8080/hotfix/dropdowns");
+  localStorage.setItem("HotfixDropdown", JSON.stringify(hotfixDropdown));
   data && localStorage.setItem("Existing Release", JSON.stringify(data));
 
   // const parsedData = Object.keys(data).map((key) => [key, data[key]]);

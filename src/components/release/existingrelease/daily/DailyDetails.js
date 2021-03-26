@@ -4,7 +4,6 @@ import Input from "./form/Input";
 import Button from "./form/Button";
 import DatePickerHOC from "./form/DatePickerHOC";
 import CreatableSelect from "react-select/creatable";
-
 import { withRouter } from "react-router";
 
 const DailyDetails = (props) => {
@@ -145,8 +144,20 @@ const DailyDetails = (props) => {
                   btnClass="validate"
                   btnText="Item"
                   btnWidth="m6"
+                  disabled
                   btnValue={item}
                   changeHandler={setItem}
+                />
+                <Input
+                  key={pod}
+                  btnID={pod}
+                  btnType="text"
+                  btnClass="validate"
+                  btnText="POD"
+                  btnWidth="m3"
+                  btnValue={pod}
+                  disabled
+                  changeHandler={setPod}
                 />
                 <div className="col s12 m3">
                   <CreatableSelect
