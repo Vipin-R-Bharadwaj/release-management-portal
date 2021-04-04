@@ -201,7 +201,7 @@ const DailyDetails = (props) => {
                   btnWidth="m4"
                   btnValue={tor}
                   disabled
-                  changeHandler={setImpact}
+                  changeHandler={setTor}
                 />
               </div>
               <div className="row">
@@ -322,7 +322,6 @@ const DailyDetails = (props) => {
                   btnlabel="Bar Date"
                   disabled
                   changeHandler={setBarDate}
-                  key="8"
                 />
               </div>
               <div className="row">

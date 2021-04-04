@@ -1,22 +1,21 @@
-import { withRouter } from "react-router";
-import useFetch from "../../../useFetch";
-import Modal from "@material-ui/core/Modal";
-import { useState } from "react";
-import CreatableSelect from "react-select/creatable";
+import { withRouter } from 'react-router';
+import useFetch from '../../../useFetch';
+import Modal from '@material-ui/core/Modal';
+import { useState } from 'react';
 
 const AdminDashboard = (props) => {
-  const data = useFetch("http://localhost:8000/login");
+  const data = useFetch('http://localhost:8000/login');
 
   const [openEdit, setOpenEdit] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
 
-  const [editusername, setEditUsername] = useState(null);
-  const [editpassword, setEditPassword] = useState(null);
-  const [editconfirmPassword, setEditConfirmPassword] = useState(null);
-  const [editemail, setEditEmail] = useState(null);
-  const [editemployeeId, setEditEmployeeId] = useState(null);
-  const [editpodId, setEditPodId] = useState(null);
-  const [editRole, setEditRole] = useState(null);
+  // const [editusername, setEditUsername] = useState(null);
+  // const [editpassword, setEditPassword] = useState(null);
+  // const [editconfirmPassword, setEditConfirmPassword] = useState(null);
+  // const [editemail, setEditEmail] = useState(null);
+  // const [editemployeeId, setEditEmployeeId] = useState(null);
+  // const [editpodId, setEditPodId] = useState(null);
+  // const [editRole, setEditRole] = useState(null);
 
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
@@ -30,9 +29,9 @@ const AdminDashboard = (props) => {
     setOpenEdit(true);
   };
 
-  const handleCloseEdit = () => {
-    setOpenEdit(false);
-  };
+  // const handleCloseEdit = () => {
+  //   setOpenEdit(false);
+  // };
 
   const handleOpenAdd = () => {
     setOpenAdd(true);
@@ -42,38 +41,39 @@ const AdminDashboard = (props) => {
     setOpenAdd(false);
   };
 
-  const [option, setOption] = useState("1");
-  const clickHandler = (event) => {
-    if (event !== null) {
-      setOption(event.value);
-    }
-  };
+  const [option, setOption] = useState('1');
 
-  const optionList = [
-    { label: "Developer", value: "1" },
-    { label: "Manager", value: "2" },
-    { label: "Release Manager", value: "3" },
-    { label: "Devops", value: "4" },
-  ];
+  // const clickHandler = (event) => {
+  //   if (event !== null) {
+  //     setOption(event.value);
+  //   }
+  // };
 
-  const submitEditHandler = (event) => {
-    event.preventDefault();
-    password === confirmPassword ? (
-      <>
-        {console.log({
-          username: username,
-          password: password,
-          confirmPassword: confirmPassword,
-          email: email,
-          employeeId: employeeId,
-          podId: podId,
-        })}
-        {handleCloseAdd()}
-      </>
-    ) : (
-      window.M.toast({ html: "Passwords dont match" })
-    );
-  };
+  // const optionList = [
+  //   { label: 'Developer', value: '1' },
+  //   { label: 'Manager', value: '2' },
+  //   { label: 'Release Manager', value: '3' },
+  //   { label: 'Devops', value: '4' },
+  // ];
+
+  // const submitEditHandler = (event) => {
+  //   event.preventDefault();
+  //   password === confirmPassword ? (
+  //     <>
+  //       {console.log({
+  //         username: username,
+  //         password: password,
+  //         confirmPassword: confirmPassword,
+  //         email: email,
+  //         employeeId: employeeId,
+  //         podId: podId,
+  //       })}
+  //       {handleCloseAdd()}
+  //     </>
+  //   ) : (
+  //     window.M.toast({ html: 'Passwords dont match' })
+  //   );
+  // };
 
   const submitAddHandler = (event) => {
     event.preventDefault();
@@ -90,10 +90,10 @@ const AdminDashboard = (props) => {
           role: roleArray,
         })}
         {}
-        {fetch("http://localhost:8081/api/auth/signup", {
-          method: "POST",
+        {fetch('http://localhost:8081/api/auth/signup', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             username: username,
@@ -108,16 +108,16 @@ const AdminDashboard = (props) => {
             return res.json();
           })
           .then((data) => console.log(data))}
-        {handleCloseEdit()}
+        {handleCloseAdd()}
       </>
     ) : (
-      window.M.toast({ html: "Passwords dont match" })
+      window.M.toast({ html: 'Passwords dont match' })
     );
   };
 
   const deleteHandler = (event) => {
     event.preventDefault();
-    console.log("Deleted!");
+    console.log('Deleted!');
   };
 
   const body = (
@@ -295,7 +295,7 @@ const AdminDashboard = (props) => {
             <Modal
               open={openAdd}
               onClose={handleCloseAdd}
-              style={{ padding: "7%" }}
+              style={{ padding: '7%' }}
             >
               {body}
             </Modal>

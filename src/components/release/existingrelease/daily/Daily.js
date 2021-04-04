@@ -1,19 +1,18 @@
-import { useState } from "react";
-import useFetch from "../../../../useFetch";
-import CreatableSelect from "react-select/creatable";
-import { withRouter } from "react-router";
-import DailyList from "./DailyList";
+import { useState } from 'react';
+import CreatableSelect from 'react-select/creatable';
+import { withRouter } from 'react-router';
+import DailyList from './DailyList';
 
 const Daily = (props) => {
-  const data = JSON.parse(localStorage.getItem("Existing Release")).daily;
+  const data = JSON.parse(localStorage.getItem('Existing Release')).daily;
   // const parsedData = Object.keys(data).map((key) => [key, data[key]]);
   const optionList = [
-    { label: "All", value: "1" },
-    { label: "Daily Release", value: "2" },
-    { label: "Frontend Release", value: "3" },
-    { label: "Hotfix Relese", value: "4" },
+    { label: 'All', value: '1' },
+    { label: 'Daily Release', value: '2' },
+    { label: 'Frontend Release', value: '3' },
+    { label: 'Hotfix Relese', value: '4' },
   ];
-  const [option, setOption] = useState("2");
+  const [option, setOption] = useState('2');
   const clickHandler = (event) => {
     if (event !== null) {
       setOption(event.value);
@@ -33,7 +32,7 @@ const Daily = (props) => {
         defaultValue="Select release type"
         maxMenuHeight={170}
       />
-      {option === "2" ? (
+      {option === '2' ? (
         <div className="row">
           <div className="padding-top-20px">
             <table className="highlight striped white">
@@ -61,24 +60,24 @@ const Daily = (props) => {
             </table>
           </div>
         </div>
-      ) : option === "1" ? (
+      ) : option === '1' ? (
         props.history.push(
           `/${
-            JSON.parse(localStorage.getItem("credentials")).role
+            JSON.parse(localStorage.getItem('credentials')).role
           }/existingrelease/all`
         )
       ) : // <Daily />
-      option === "3" ? (
+      option === '3' ? (
         props.history.push(
           `/${
-            JSON.parse(localStorage.getItem("credentials")).role
+            JSON.parse(localStorage.getItem('credentials')).role
           }/existingrelease/frontend`
         )
       ) : // <Frontend />
-      option === "4" ? (
+      option === '4' ? (
         props.history.push(
           `/${
-            JSON.parse(localStorage.getItem("credentials")).role
+            JSON.parse(localStorage.getItem('credentials')).role
           }/existingrelease/hotfix`
         )
       ) : (

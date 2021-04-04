@@ -189,7 +189,6 @@ const HotfixDetails = (props) => {
                   value={releaseDate}
                   disabled={true}
                   changeHandler={(event) => setReleaseDate(event)}
-                  disabled={true}
                 />
               </div>
               <Input

@@ -1,7 +1,6 @@
 import Form from './form/Form';
 import { useState } from 'react';
 import pageImg from '../../images/about_bg.png';
-// import ValidateInput from "../../validation/ValidateInput";
 import { withRouter } from 'react-router';
 import useFetch from '../../useFetch';
 import { useEffect } from 'react';
@@ -17,24 +16,24 @@ const LoginForm = (props) => {
     localStorage.clear();
   }, []);
 
-  const makeCall = async () => {
-    const credentials = {
-      email: email,
-      password: password,
-    };
-    fetch('http://localhost:8000/signin', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json, text/plain',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(credentials),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => console.log(data));
-  };
+  // const makeCall = async () => {
+  //   const credentials = {
+  //     email: email,
+  //     password: password,
+  //   };
+  //   fetch('http://localhost:8000/signin', {
+  //     method: 'POST',
+  //     headers: {
+  //       Accept: 'application/json, text/plain',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(credentials),
+  //   })
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((data) => console.log(data));
+  // };
 
   const changeHandler = (event) => {
     if (event.target.id === 'password') {

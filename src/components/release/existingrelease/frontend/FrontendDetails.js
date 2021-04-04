@@ -8,16 +8,6 @@ const FrontendDetails = (props) => {
   const data = JSON.parse(localStorage.getItem('Existing Release')).frontend;
   console.log(data);
 
-  const getDropdown = (arr) => {
-    var tmp = [];
-    for (var i = 0; i < arr.length; ++i) {
-      if (arr[i] !== undefined) {
-        tmp.push({ label: arr[i], value: arr[i] });
-      }
-    }
-    return tmp;
-  };
-
   const submitHandler = (event) => {
     event.preventDefault();
     props.history.replace(
