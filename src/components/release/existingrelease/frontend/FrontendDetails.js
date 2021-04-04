@@ -1,14 +1,11 @@
-// import { useEffect, useState } from "react";
-import { withRouter } from "react-router";
-import Button from "./form/Button";
-import DatePickerHOC from "./form/DatePickerHOC";
-import Input from "./form/Input";
-import CreatableSelect from "react-select/creatable";
-import { useState } from "react";
+import { withRouter } from 'react-router';
+import Button from './form/Button';
+import DatePickerHOC from './form/DatePickerHOC';
+import Input from './form/Input';
+import { useState } from 'react';
 
 const FrontendDetails = (props) => {
-  // const [data, setData] = useState(data[0].);
-  const data = JSON.parse(localStorage.getItem("Existing Release")).frontend;
+  const data = JSON.parse(localStorage.getItem('Existing Release')).frontend;
   console.log(data);
 
   const getDropdown = (arr) => {
@@ -21,24 +18,11 @@ const FrontendDetails = (props) => {
     return tmp;
   };
 
-  // const impactList = getDropdown(
-  //   JSON.parse(localStorage.getItem("FrontendDropdown")).impact
-  // );
-  // const impactAreasList = getDropdown(
-  //   JSON.parse(localStorage.getItem("FrontendDropdown")).impact_areas
-  // );
-  // const platformList = getDropdown(
-  //   JSON.parse(localStorage.getItem("FrontendDropdown")).platform
-  // );
-  // const releaseTypeList = getDropdown(
-  //   JSON.parse(localStorage.getItem("FrontendDropdown")).release_type
-  // );
-
   const submitHandler = (event) => {
     event.preventDefault();
     props.history.replace(
       `/${
-        JSON.parse(localStorage.getItem("credentials")).role
+        JSON.parse(localStorage.getItem('credentials')).role
       }/existingrelease/frontend`
     );
   };
@@ -64,21 +48,21 @@ const FrontendDetails = (props) => {
 
   const inputOptions3 = [
     {
-      btnID: "developerPOC",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Developer Point of Contact",
-      btnWidth: "m4",
+      btnID: 'developerPOC',
+      btnType: 'text',
+      btnClass: '',
+      btnText: 'Developer Point of Contact',
+      btnWidth: 'm4',
       disabled: true,
       btnValue: { developerPOC },
       changeHandler: { setDeveloperPOC },
     },
     {
-      btnID: "qaPOC",
-      btnType: "text",
-      btnClass: "",
-      btnText: "QA Point of Contact",
-      btnWidth: "m5",
+      btnID: 'qaPOC',
+      btnType: 'text',
+      btnClass: '',
+      btnText: 'QA Point of Contact',
+      btnWidth: 'm5',
       disabled: true,
       btnValue: { qaPOC },
       changeHandler: { setQaPOC },
@@ -86,29 +70,29 @@ const FrontendDetails = (props) => {
   ];
   const inputOptions4 = [
     {
-      btnID: "releasePercentage",
-      btnType: "text",
-      btnClass: "",
+      btnID: 'releasePercentage',
+      btnType: 'text',
+      btnClass: '',
       disabled: true,
-      btnText: "Release Percentage",
-      btnWidth: "m4",
+      btnText: 'Release Percentage',
+      btnWidth: 'm4',
       btnValue: { releasePercentage },
       changeHandler: { setReleasePercentage },
     },
     {
-      btnID: "releaseWindow",
-      btnType: "text",
-      btnClass: "",
+      btnID: 'releaseWindow',
+      btnType: 'text',
+      btnClass: '',
       disabled: true,
-      btnText: "Release Window",
-      btnWidth: "m5",
+      btnText: 'Release Window',
+      btnWidth: 'm5',
       btnValue: { releaseWindow },
       changeHandler: { setReleaseWindow },
     },
   ];
   const dateOptions1 = [
     {
-      id: "releaseSignOffDate",
+      id: 'releaseSignOffDate',
       disabled: true,
       dateHandler: { setReleaseSignOffDate },
       value: { releaseSignOffDate },
@@ -116,7 +100,7 @@ const FrontendDetails = (props) => {
   ];
   const dateOptions2 = [
     {
-      id: "releaseDate",
+      id: 'releaseDate',
       disabled: true,
       dateHandler: { setReleaseDate },
       value: { releaseDate },
@@ -126,7 +110,7 @@ const FrontendDetails = (props) => {
   const backHandler = (event) => {
     event.preventDefault();
     props.history.replace(
-      `/${JSON.parse(localStorage.getItem("credentials")).role}/newrelease`
+      `/${JSON.parse(localStorage.getItem('credentials')).role}/newrelease`
     );
   };
 

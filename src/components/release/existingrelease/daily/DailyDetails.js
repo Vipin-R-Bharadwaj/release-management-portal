@@ -1,14 +1,13 @@
-import { useState } from "react";
-// import ValidateURL from "../../../../../validation/ValidateURL";
-import Input from "./form/Input";
-import Button from "./form/Button";
-import DatePickerHOC from "./form/DatePickerHOC";
-import CreatableSelect from "react-select/creatable";
-import { withRouter } from "react-router";
+import { useState } from 'react';
+import Input from './form/Input';
+import Button from './form/Button';
+import DatePickerHOC from './form/DatePickerHOC';
+import CreatableSelect from 'react-select/creatable';
+import { withRouter } from 'react-router';
 
 const DailyDetails = (props) => {
   // const [data, setData] = useState(DailyData);
-  const data = JSON.parse(localStorage.getItem("Existing Release")).daily;
+  const data = JSON.parse(localStorage.getItem('Existing Release')).daily;
 
   const getDropdown = (arr) => {
     var tmp = [];
@@ -21,51 +20,8 @@ const DailyDetails = (props) => {
   };
 
   const releaseStatusList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).release_status
+    JSON.parse(localStorage.getItem('Dropdown')).release_status
   );
-
-  // dev - On_Hold and QA_Ready
-  // manager - Aanager_Approved and Rejected and On_Hold
-  // qa - Rejected, On_Hold, QA_Approved
-
-  // const podList = getDropdown(
-  //   JSON.parse(localStorage.getItem("DailyDropdown")).pod
-  // );
-
-  // const releaseTypeList = getDropdown(
-  //   JSON.parse(localStorage.getItem("DailyDropdown")).release_type
-  // );
-
-  // const impactList = getDropdown(
-  //   JSON.parse(localStorage.getItem("DailyDropdown")).impact
-  // );
-
-  // const impactAreasList = getDropdown(
-  //   JSON.parse(localStorage.getItem("DailyDropdown")).impact_areas
-  // );
-
-  // const requiresBarList = getDropdown(
-  //   JSON.parse(localStorage.getItem("DailyDropdown")).generic
-  // );
-
-  // const sqlApprovalList = getDropdown(
-  //   JSON.parse(localStorage.getItem("DailyDropdown")).sql_queries_approval
-  // );
-
-  // const heavySQLAlterList = [
-  //   {
-  //     label: "Yes",
-  //     value: "Yes",
-  //   },
-  //   {
-  //     label: "No",
-  //     value: "No",
-  //   },
-  // ];
-
-  // const torList = getDropdown(
-  //   JSON.parse(localStorage.getItem("DailyDropdown")).type_of_release
-  // );
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -97,7 +53,7 @@ const DailyDetails = (props) => {
     event.preventDefault();
     props.history.push(
       `/${
-        JSON.parse(localStorage.getItem("credentials")).role
+        JSON.parse(localStorage.getItem('credentials')).role
       }/existingrelease/all`
     );
   };
@@ -314,18 +270,18 @@ const DailyDetails = (props) => {
                 />
                 {[
                   [
-                    "stageQASignoffDate",
+                    'stageQASignoffDate',
                     true,
                     6,
                     setStageQASignoffDate,
-                    "Stage QA Signoff Date",
+                    'Stage QA Signoff Date',
                   ],
                   [
-                    "integrationQASignoffDate",
+                    'integrationQASignoffDate',
                     true,
                     7,
                     setIntegrationQASignoffDate,
-                    "Integration QA Signoff Date",
+                    'Integration QA Signoff Date',
                   ],
                 ].map((element) => (
                   <DatePickerHOC

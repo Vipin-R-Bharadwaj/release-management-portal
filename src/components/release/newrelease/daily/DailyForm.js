@@ -1,10 +1,10 @@
 // import ValidateURL from "../../../../../validation/ValidateURL";
-import Input from "./Input";
-import Button from "./Button";
-import DatePickerHOC from "./DatePickerHOC";
-import { withRouter } from "react-router";
-import CreatableSelect from "react-select/creatable";
-import { useState } from "react";
+import Input from './Input';
+import Button from './Button';
+import DatePickerHOC from './DatePickerHOC';
+import { withRouter } from 'react-router';
+import CreatableSelect from 'react-select/creatable';
+import { useState } from 'react';
 
 const DailyForm = (props) => {
   const getDropdown = (arr) => {
@@ -17,48 +17,44 @@ const DailyForm = (props) => {
     return tmp;
   };
 
-  const podList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).pod
-  );
+  const podList = getDropdown(JSON.parse(localStorage.getItem('Dropdown')).pod);
 
   const releaseStatusList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).release_status
+    JSON.parse(localStorage.getItem('Dropdown')).releaseStatus
   );
 
   const releaseTypeList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).release_type
+    JSON.parse(localStorage.getItem('Dropdown')).releaseType
   );
 
   const impactList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).impact
+    JSON.parse(localStorage.getItem('Dropdown')).impact
   );
 
   const impactAreasList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).impact_areas
+    JSON.parse(localStorage.getItem('Dropdown')).impactAreas
   );
 
   const requiresBarList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).generic
+    JSON.parse(localStorage.getItem('Dropdown')).generic
   );
 
   const sqlApprovalList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).sql_queries_approval
+    JSON.parse(localStorage.getItem('Dropdown')).approvedBy
   );
 
   const heavySQLAlterList = [
     {
-      label: "Yes",
-      value: "Yes",
+      label: 'Yes',
+      value: 'Yes',
     },
     {
-      label: "No",
-      value: "No",
+      label: 'No',
+      value: 'No',
     },
   ];
 
-  const torList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).type_of_release
-  );
+  const torList = getDropdown(JSON.parse(localStorage.getItem('Dropdown')).tor);
 
   const [item, setItem] = useState(null);
   const [pod, setPod] = useState(null);
@@ -109,16 +105,16 @@ const DailyForm = (props) => {
         bar_date: barDate,
       })
     );
-    console.log("Form Submitted!");
+    console.log('Form Submitted!');
     props.history.push(
-      `/${JSON.parse(localStorage.getItem("credentials")).role}/newrelease`
+      `/${JSON.parse(localStorage.getItem('credentials')).role}/newrelease`
     );
   };
 
   const backHandler = (event) => {
     event.preventDefault();
     props.history.push(
-      `/${JSON.parse(localStorage.getItem("credentials")).role}/newrelease`
+      `/${JSON.parse(localStorage.getItem('credentials')).role}/newrelease`
     );
   };
 
@@ -292,9 +288,9 @@ const DailyForm = (props) => {
                   changeHandler={setQaPOC}
                 />
                 {[
-                  ["stageQASignoffDate", false, 6, setStageQASignoffDate],
+                  ['stageQASignoffDate', false, 6, setStageQASignoffDate],
                   [
-                    "integrationQASignoffDate",
+                    'integrationQASignoffDate',
                     false,
                     7,
                     setIntegrationQASignoffDate,

@@ -1,14 +1,10 @@
-import { Link, NavLink } from "react-router-dom";
-import useFetch from "../../../useFetch";
+import { Link, NavLink } from 'react-router-dom';
+import useFetch from '../../../useFetch';
 // import newRelease from "../../../images/contact_header";
 
 const NewDashboard = () => {
-  const dailyDropdown = useFetch("http://localhost:8080/daily/dropdowns");
-  localStorage.setItem("DailyDropdown", JSON.stringify(dailyDropdown));
-  const frontendDropdown = useFetch("http://localhost:8080/frontend/dropdowns");
-  localStorage.setItem("FrontendDropdown", JSON.stringify(frontendDropdown));
-  const hotfixDropdown = useFetch("http://localhost:8080/hotfix/dropdowns");
-  localStorage.setItem("HotfixDropdown", JSON.stringify(hotfixDropdown));
+  const dropdown = useFetch('http://localhost:8000/dropdown');
+  localStorage.setItem('Dropdown', JSON.stringify(dropdown));
   return (
     <div className="center sendBackground">
       <div className="padding-top-40px"></div>
@@ -20,7 +16,7 @@ const NewDashboard = () => {
           <div className="dailyCardPadding">
             <NavLink
               to={`/${
-                JSON.parse(localStorage.getItem("credentials")).role
+                JSON.parse(localStorage.getItem('credentials')).role
               }/newrelease/daily`}
             >
               <div className="card formStyle2 hoverable light-green">
@@ -58,7 +54,7 @@ const NewDashboard = () => {
           <div className="frontendCardPadding">
             <Link
               to={`/${
-                JSON.parse(localStorage.getItem("credentials")).role
+                JSON.parse(localStorage.getItem('credentials')).role
               }/newrelease/frontend`}
             >
               <div className="card formStyle2 hoverable light-green">
@@ -89,7 +85,7 @@ const NewDashboard = () => {
           <div className="hotfixCardPadding">
             <Link
               to={`/${
-                JSON.parse(localStorage.getItem("credentials")).role
+                JSON.parse(localStorage.getItem('credentials')).role
               }/newrelease/hotfix`}
             >
               <div className="card formStyle2 hoverable light-green">

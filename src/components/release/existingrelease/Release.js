@@ -1,28 +1,24 @@
-import { useState } from "react";
-import ReleaseList from "./ReleaseList";
-import { withRouter } from "react-router";
-import CreatableSelect from "react-select/creatable";
-import useFetch from "../../../useFetch";
+import { useState } from 'react';
+import ReleaseList from './ReleaseList';
+import { withRouter } from 'react-router';
+import CreatableSelect from 'react-select/creatable';
+import useFetch from '../../../useFetch';
 
 const Release = (props) => {
-  const userid = JSON.parse(localStorage.getItem("credentials")).eid;
+  const userid = JSON.parse(localStorage.getItem('credentials')).eid;
   const data = useFetch(`http://localhost:8000/${userid}`);
-  const dailyDropdown = useFetch("http://localhost:8080/daily/dropdowns");
-  localStorage.setItem("DailyDropdown", JSON.stringify(dailyDropdown));
-  const frontendDropdown = useFetch("http://localhost:8080/frontend/dropdowns");
-  localStorage.setItem("FrontendDropdown", JSON.stringify(frontendDropdown));
-  const hotfixDropdown = useFetch("http://localhost:8080/hotfix/dropdowns");
-  localStorage.setItem("HotfixDropdown", JSON.stringify(hotfixDropdown));
-  data && localStorage.setItem("Existing Release", JSON.stringify(data));
+  const dropdown = useFetch('http://localhost:8000/dropdown');
+  localStorage.setItem('Dropdown', JSON.stringify(dropdown));
+  data && localStorage.setItem('Existing Release', JSON.stringify(data));
 
   // const parsedData = Object.keys(data).map((key) => [key, data[key]]);
   const optionList = [
-    { label: "All", value: "1" },
-    { label: "Daily Release", value: "2" },
-    { label: "Frontend Release", value: "3" },
-    { label: "Hotfix Relese", value: "4" },
+    { label: 'All', value: '1' },
+    { label: 'Daily Release', value: '2' },
+    { label: 'Frontend Release', value: '3' },
+    { label: 'Hotfix Relese', value: '4' },
   ];
-  const [option, setOption] = useState("1");
+  const [option, setOption] = useState('1');
   const clickHandler = (event) => {
     if (event !== null) {
       setOption(event.value);
@@ -41,7 +37,7 @@ const Release = (props) => {
         defaultValue="Select release type"
         maxMenuHeight={170}
       />
-      {option === "1" ? (
+      {option === '1' ? (
         <div className="row">
           <div className="padding-top-20px">
             <table className="highlight striped white">
@@ -60,7 +56,7 @@ const Release = (props) => {
                   data.daily.map((element) => (
                     <ReleaseList
                       role={
-                        JSON.parse(localStorage.getItem("credentials")).role
+                        JSON.parse(localStorage.getItem('credentials')).role
                       }
                       typeOfRelease="daily"
                       key={element.id}
@@ -72,7 +68,7 @@ const Release = (props) => {
                   data.frontend.map((element) => (
                     <ReleaseList
                       role={
-                        JSON.parse(localStorage.getItem("credentials")).role
+                        JSON.parse(localStorage.getItem('credentials')).role
                       }
                       typeOfRelease="frontend"
                       key={element.id}
@@ -84,7 +80,7 @@ const Release = (props) => {
                   data.hotfix.map((element) => (
                     <ReleaseList
                       role={
-                        JSON.parse(localStorage.getItem("credentials")).role
+                        JSON.parse(localStorage.getItem('credentials')).role
                       }
                       typeOfRelease="hotfix"
                       key={element.id}
@@ -96,22 +92,22 @@ const Release = (props) => {
             </table>
           </div>
         </div>
-      ) : option === "2" ? (
+      ) : option === '2' ? (
         props.history.push(
           `/${
-            JSON.parse(localStorage.getItem("credentials")).role
+            JSON.parse(localStorage.getItem('credentials')).role
           }/existingrelease/daily`
         )
-      ) : option === "3" ? (
+      ) : option === '3' ? (
         props.history.push(
           `/${
-            JSON.parse(localStorage.getItem("credentials")).role
+            JSON.parse(localStorage.getItem('credentials')).role
           }/existingrelease/frontend`
         )
-      ) : option === "4" ? (
+      ) : option === '4' ? (
         props.history.push(
           `/${
-            JSON.parse(localStorage.getItem("credentials")).role
+            JSON.parse(localStorage.getItem('credentials')).role
           }/existingrelease/hotfix`
         )
       ) : (

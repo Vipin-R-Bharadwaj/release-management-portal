@@ -1,13 +1,13 @@
-import { withRouter } from "react-router";
+import { withRouter } from 'react-router';
 // import ValidateURL from "../../../../../validation/ValidateURL";
-import Button from "./form/Button";
-import DatePicker from "./form/DatePicker";
-import Input from "./form/Input";
-import { useState } from "react";
-import CreatableSelect from "react-select/creatable";
+import Button from './form/Button';
+import DatePicker from './form/DatePicker';
+import Input from './form/Input';
+import { useState } from 'react';
+import CreatableSelect from 'react-select/creatable';
 
 const HotfixDetails = (props) => {
-  const storedData = JSON.parse(localStorage.getItem("Existing Release"))
+  const storedData = JSON.parse(localStorage.getItem('Existing Release'))
     .hotfix;
   const data = storedData.filter((release) => {
     if (release.id === parseInt(props.match.params.id)) return release;
@@ -18,7 +18,7 @@ const HotfixDetails = (props) => {
     event.preventDefault();
     props.history.replace(
       `/${
-        JSON.parse(localStorage.getItem("credentials")).role
+        JSON.parse(localStorage.getItem('credentials')).role
       }/existingrelease/hotfix`
     );
   };
@@ -33,44 +33,9 @@ const HotfixDetails = (props) => {
     return tmp;
   };
 
-  const podList = getDropdown(
-    JSON.parse(localStorage.getItem("HotfixDropdown")).pod
-  );
-
-  const releaseTypeList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).release_type
-  );
-
-  const impactList = getDropdown(
-    JSON.parse(localStorage.getItem("HotfixDropdown")).impact
-  );
-
-  const impactAreasList = getDropdown(
-    JSON.parse(localStorage.getItem("HotfixDropdown")).impact_areas
-  );
-
   const releaseStatusList = getDropdown(
-    JSON.parse(localStorage.getItem("HotfixDropdown")).release_status
+    JSON.parse(localStorage.getItem('Dropdown')).releaseStatus
   );
-
-  const torList = getDropdown(
-    JSON.parse(localStorage.getItem("HotfixDropdown")).type_of_release
-  );
-
-  const approvedByList = getDropdown(
-    JSON.parse(localStorage.getItem("HotfixDropdown")).appoved_by
-  );
-
-  const heavySQLAlterList = [
-    {
-      label: "Yes",
-      value: "Yes",
-    },
-    {
-      label: "No",
-      value: "No",
-    },
-  ];
 
   const [item, setItem] = useState(data[0].item);
   const [pod, setPod] = useState(data[0].pod);
@@ -95,7 +60,7 @@ const HotfixDetails = (props) => {
     event.preventDefault();
     props.history.push(
       `/${
-        JSON.parse(localStorage.getItem("credentials")).role
+        JSON.parse(localStorage.getItem('credentials')).role
       }/existingrelease/all`
     );
   };

@@ -81,6 +81,72 @@
       "release": "Daily"
     }
   ],
+  "dropdown": {
+    "platform": [
+      "PWA",
+      "MV Portal",
+      "Agency Portal",
+      "MV site",
+      "MVL APP",
+      "PFM APP",
+      "DSA"
+    ],
+    "impact": ["Low", "Medium", "High"],
+    "impactAreas": [
+      "Start to Eligible funnel",
+      "Eligible to Submit funnel",
+      "Submit to Disbursal funnel",
+      "Ticket size",
+      "Collections",
+      "Cost",
+      "Ops Productivity",
+      "Health, Scale, etc",
+      "ExternalPartner",
+      "Communications"
+    ],
+    "releaseType": ["Feature", "Bugfix"],
+    "pod": [
+      "Amort",
+      "Collections",
+      "CP",
+      "Credit",
+      "Data",
+      "Devops",
+      "Growth",
+      "Lead-Acq",
+      "OPS",
+      "PI",
+      "RTB"
+    ],
+    "releaseStatus": ["To-Do", "In-progress", "Done"],
+    "tor": [
+      "App and Portal Server",
+      "App Server",
+      "App Server - whizdm",
+      "App Server / Portal / RazorPay",
+      "Atlas",
+      "Beta Portal",
+      "Bifrost",
+      "Blitz",
+      "Cupid",
+      "Integra",
+      "Jarvis",
+      "MV Portal",
+      "Portal (LMS)",
+      "Portal (LOS)",
+      "RazorPay",
+      "TPI",
+      "TxnProc",
+      "Unnati",
+      "ViralHeat",
+      "Whizdm",
+      "Yoke",
+      "SQL release",
+      "Taika"
+    ],
+    "approvedBy": ["Gurdev", "Ramesh", "Sachin", "Sanjay", "NA"],
+    "generic": ["Yes", "No"]
+  },
   "frontend": [
     {
       "id": 1,

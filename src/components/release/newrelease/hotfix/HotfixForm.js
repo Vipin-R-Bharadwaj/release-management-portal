@@ -1,13 +1,13 @@
-import { withRouter } from "react-router";
-// import ValidateURL from "../../../../../validation/ValidateURL";
-import Button from "./Button";
-import DatePicker from "./DatePicker";
-import Input from "./Input";
-import { useState } from "react";
-import CreatableSelect from "react-select/creatable";
+import { withRouter } from 'react-router';
+import Button from './Button';
+import DatePicker from './DatePicker';
+import Input from './Input';
+import { useState } from 'react';
+import CreatableSelect from 'react-select/creatable';
 
 const HotfixForm = (props) => {
   const getDropdown = (arr) => {
+    console.log(arr);
     var tmp = [];
     for (var i = 0; i < arr.length; ++i) {
       if (arr[i] !== undefined) {
@@ -17,42 +17,38 @@ const HotfixForm = (props) => {
     return tmp;
   };
 
-  const podList = getDropdown(
-    JSON.parse(localStorage.getItem("HotfixDropdown")).pod
-  );
+  const podList = getDropdown(JSON.parse(localStorage.getItem('Dropdown')).pod);
 
   const releaseTypeList = getDropdown(
-    JSON.parse(localStorage.getItem("DailyDropdown")).release_type
+    JSON.parse(localStorage.getItem('Dropdown')).releaseType
   );
 
   const impactList = getDropdown(
-    JSON.parse(localStorage.getItem("HotfixDropdown")).impact
+    JSON.parse(localStorage.getItem('Dropdown')).impact
   );
 
   const impactAreasList = getDropdown(
-    JSON.parse(localStorage.getItem("HotfixDropdown")).impact_areas
+    JSON.parse(localStorage.getItem('Dropdown')).impactAreas
   );
 
   const releaseStatusList = getDropdown(
-    JSON.parse(localStorage.getItem("HotfixDropdown")).release_status
+    JSON.parse(localStorage.getItem('Dropdown')).releaseStatus
   );
 
-  const torList = getDropdown(
-    JSON.parse(localStorage.getItem("HotfixDropdown")).type_of_release
-  );
+  const torList = getDropdown(JSON.parse(localStorage.getItem('Dropdown')).tor);
 
   const approvedByList = getDropdown(
-    JSON.parse(localStorage.getItem("HotfixDropdown")).appoved_by
+    JSON.parse(localStorage.getItem('Dropdown')).approvedBy
   );
 
   const heavySQLAlterList = [
     {
-      label: "Yes",
-      value: "Yes",
+      label: 'Yes',
+      value: 'Yes',
     },
     {
-      label: "No",
-      value: "No",
+      label: 'No',
+      value: 'No',
     },
   ];
 
@@ -77,36 +73,36 @@ const HotfixForm = (props) => {
 
   const inputOptions7 = [
     {
-      btnID: "qaBy",
-      btnType: "text",
-      btnClass: "",
-      btnText: "QA By",
-      btnWidth: "m4",
+      btnID: 'qaBy',
+      btnType: 'text',
+      btnClass: '',
+      btnText: 'QA By',
+      btnWidth: 'm4',
       changeHandler: { setQaBy },
     },
     {
-      btnID: "srd",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Source Release Date",
-      btnWidth: "m4",
+      btnID: 'srd',
+      btnType: 'text',
+      btnClass: '',
+      btnText: 'Source Release Date',
+      btnWidth: 'm4',
       changeHandler: { setSrd },
     },
     {
-      btnID: "soh",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Source of Hotfix",
-      btnWidth: "m4",
+      btnID: 'soh',
+      btnType: 'text',
+      btnClass: '',
+      btnText: 'Source of Hotfix',
+      btnWidth: 'm4',
       changeHandler: { setSoh },
     },
   ];
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log("Form Submitted!");
+    console.log('Form Submitted!');
     props.history.push(
-      `/${JSON.parse(localStorage.getItem("credentials")).role}/newrelease`
+      `/${JSON.parse(localStorage.getItem('credentials')).role}/newrelease`
     );
     // ValidateURL(state.prLink)
     //   ? console.log(state)
@@ -115,7 +111,7 @@ const HotfixForm = (props) => {
   const backHandler = (event) => {
     event.preventDefault();
     props.history.push(
-      `/${JSON.parse(localStorage.getItem("credentials")).role}/newrelease`
+      `/${JSON.parse(localStorage.getItem('credentials')).role}/newrelease`
     );
   };
 

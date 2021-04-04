@@ -1,17 +1,17 @@
-import Form from "./form/Form";
-import { useState } from "react";
-import pageImg from "../../images/about_bg.png";
+import Form from './form/Form';
+import { useState } from 'react';
+import pageImg from '../../images/about_bg.png';
 // import ValidateInput from "../../validation/ValidateInput";
-import { withRouter } from "react-router";
-import useFetch from "../../useFetch";
-import { useEffect } from "react";
-import loginSuccess from "./LoginSuccess";
+import { withRouter } from 'react-router';
+import useFetch from '../../useFetch';
+import { useEffect } from 'react';
+import loginSuccess from './LoginSuccess';
 
 const LoginForm = (props) => {
-  const [password, setpassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const Data = useFetch("http://localhost:8000/login");
+  const [password, setpassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const Data = useFetch('http://localhost:8000/login');
 
   useEffect(() => {
     localStorage.clear();
@@ -22,11 +22,11 @@ const LoginForm = (props) => {
       email: email,
       password: password,
     };
-    fetch("http://localhost:8081/api/auth/signin", {
-      method: "POST",
+    fetch('http://localhost:8000/signin', {
+      method: 'POST',
       headers: {
-        Accept: "application/json, text/plain",
-        "Content-Type": "application/json",
+        Accept: 'application/json, text/plain',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(credentials),
     })
@@ -34,21 +34,12 @@ const LoginForm = (props) => {
         return res.json();
       })
       .then((data) => console.log(data));
-    //const dataFetch = await fetchedData.json();
-    // if(dataFetch.status === "success") {
-    //   this.props.history.push({pathname : '/dev'})
-    // } else if(dataFetch.status === "Failure") {
-    //   alert('Enter proper credentials');
-    // } else {
-    //   alert("Ask Drupad to code properly")
-    // }
-    //return (dataFetch);
   };
 
   const changeHandler = (event) => {
-    if (event.target.id === "password") {
+    if (event.target.id === 'password') {
       setpassword(event.target.value);
-    } else if (event.target.id === "email") {
+    } else if (event.target.id === 'email') {
       setEmail(event.target.value);
     }
   };

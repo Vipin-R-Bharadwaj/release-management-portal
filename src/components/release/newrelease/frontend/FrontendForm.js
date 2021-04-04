@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { withRouter } from "react-router";
-import Button from "./Button";
-import DatePickerHOC from "./DatePickerHOC";
-import Input from "./Input";
-import CreatableSelect from "react-select/creatable";
+import { useState } from 'react';
+import { withRouter } from 'react-router';
+import Button from './Button';
+import DatePickerHOC from './DatePickerHOC';
+import Input from './Input';
+import CreatableSelect from 'react-select/creatable';
 
 const FrontendForm = (props) => {
   const getDropdown = (arr) => {
@@ -17,16 +17,16 @@ const FrontendForm = (props) => {
   };
 
   const impactList = getDropdown(
-    JSON.parse(localStorage.getItem("FrontendDropdown")).impact
+    JSON.parse(localStorage.getItem('Dropdown')).impact
   );
   const impactAreasList = getDropdown(
-    JSON.parse(localStorage.getItem("FrontendDropdown")).impact_areas
+    JSON.parse(localStorage.getItem('Dropdown')).impactAreas
   );
   const platformList = getDropdown(
-    JSON.parse(localStorage.getItem("FrontendDropdown")).platform
+    JSON.parse(localStorage.getItem('Dropdown')).platform
   );
   const releaseTypeList = getDropdown(
-    JSON.parse(localStorage.getItem("FrontendDropdown")).release_type
+    JSON.parse(localStorage.getItem('Dropdown')).releaseType
   );
 
   const [featuresSummary, setFeaturesSummary] = useState(null);
@@ -44,49 +44,49 @@ const FrontendForm = (props) => {
 
   const inputOptions3 = [
     {
-      btnID: "developerPOC",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Developer Point of Contact",
-      btnWidth: "m4",
+      btnID: 'developerPOC',
+      btnType: 'text',
+      btnClass: '',
+      btnText: 'Developer Point of Contact',
+      btnWidth: 'm4',
       changeHandler: { setDeveloperPOC },
     },
     {
-      btnID: "qaPOC",
-      btnType: "text",
-      btnClass: "",
-      btnText: "QA Point of Contact",
-      btnWidth: "m5",
+      btnID: 'qaPOC',
+      btnType: 'text',
+      btnClass: '',
+      btnText: 'QA Point of Contact',
+      btnWidth: 'm5',
       changeHandler: { setQaPOC },
     },
   ];
   const inputOptions4 = [
     {
-      btnID: "releasePercentage",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Release Percentage",
-      btnWidth: "m4",
+      btnID: 'releasePercentage',
+      btnType: 'text',
+      btnClass: '',
+      btnText: 'Release Percentage',
+      btnWidth: 'm4',
       changeHandler: { setReleasePercentage },
     },
     {
-      btnID: "releaseWindow",
-      btnType: "text",
-      btnClass: "",
-      btnText: "Release Window",
-      btnWidth: "m5",
+      btnID: 'releaseWindow',
+      btnType: 'text',
+      btnClass: '',
+      btnText: 'Release Window',
+      btnWidth: 'm5',
       changeHandler: { setReleaseWindow },
     },
   ];
   const dateOptions1 = [
     {
-      id: "releaseSignOffDate",
+      id: 'releaseSignOffDate',
       disabled: false,
       dateHandler: { setReleaseSignOffDate },
     },
   ];
   const dateOptions2 = [
-    { id: "releaseDate", disabled: false, dateHandler: { setReleaseDate } },
+    { id: 'releaseDate', disabled: false, dateHandler: { setReleaseDate } },
   ];
 
   const submitHandler = (event) => {
@@ -105,9 +105,9 @@ const FrontendForm = (props) => {
       releaseSignOffDate: releaseSignOffDate,
       releaseDate: releaseDate,
     });
-    console.log("Form Submitted!");
+    console.log('Form Submitted!');
     props.history.push(
-      `/${JSON.parse(localStorage.getItem("credentials")).role}/newrelease`
+      `/${JSON.parse(localStorage.getItem('credentials')).role}/newrelease`
     );
     // ValidateURL(state.prLink)
     //   ? console.log(state)
@@ -116,7 +116,7 @@ const FrontendForm = (props) => {
   const backHandler = (event) => {
     event.preventDefault();
     props.history.replace(
-      `/${JSON.parse(localStorage.getItem("credentials")).role}/newrelease`
+      `/${JSON.parse(localStorage.getItem('credentials')).role}/newrelease`
     );
   };
 
